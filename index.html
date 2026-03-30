@@ -553,20 +553,15 @@
 <section class="section quickstart" id="quickstart">
   <div class="container">
     <h2>Quick Start</h2>
-    <pre><code><span class="comment"># 1. Install the skill</span>
-<span class="cmd">mkdir -p ~/.claude/skills/decodie</span>
-<span class="cmd">git clone https://github.com/owenbush/decodie-skill.git /tmp/decodie-skill</span>
-<span class="cmd">cp /tmp/decodie-skill/SKILL.md ~/.claude/skills/decodie/</span>
-<span class="cmd">cp -r /tmp/decodie-skill/scripts/ ~/.claude/skills/decodie/scripts/</span>
+    <pre><code><span class="comment"># 1. Install the skill + UI</span>
+<span class="cmd">npx @owenbush/decodie-ui install-skill</span>
 
 <span class="comment"># 2. Code with Claude Code — entries appear in .decodie/</span>
 
 <span class="comment"># 3. Browse your entries</span>
-<span class="cmd">npx @owenbush/decodie-ui serve --dir /path/to/your/project</span>
+<span class="cmd">npx @owenbush/decodie-ui serve</span>
 
-<span class="comment"># 4. Open http://localhost:8081</span>
-
-<span class="comment"># -- or with DDEV --</span>
+<span class="comment"># -- or with DDEV (installs everything automatically) --</span>
 <span class="cmd">ddev add-on get owenbush/decodie-ddev</span>
 <span class="cmd">ddev restart</span>
 <span class="cmd">ddev decodie</span></code></pre>
