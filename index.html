@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decodie - Your AI Learning Companion</title>
+  <meta name="description" content="Decodie generates structured learning entries as a byproduct of AI-assisted coding sessions, helping developers understand what was built, how, and why.">
+  <link rel="icon" type="image/png" href="assets/decodie-icon.png">
+  <style>
+    :root {
+      --teal: #14b8a6;
+      --teal-dark: #0d9488;
+      --teal-light: #f0fdfa;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --gray-900: #111827;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--gray-900);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 5rem 1.5rem 4rem;
+      background: linear-gradient(180deg, var(--teal-light) 0%, white 100%);
+    }
+
+    .hero img {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--gray-900);
+    }
+
+    .hero .tagline {
+      font-size: 1.25rem;
+      color: var(--gray-500);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero .cta {
+      display: inline-flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--teal-dark);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--gray-200);
+      color: var(--gray-700);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    /* How it works */
+    .section {
+      padding: 4rem 0;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .flow {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .flow-step {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      width: 200px;
+    }
+
+    .flow-step .icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .flow-step h3 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .flow-step p {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+    }
+
+    .flow-arrow {
+      font-size: 1.5rem;
+      color: var(--gray-200);
+    }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature {
+      padding: 1.5rem;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      background: white;
+    }
+
+    .feature h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--teal-dark);
+    }
+
+    .feature p {
+      font-size: 0.9rem;
+      color: var(--gray-500);
+    }
+
+    /* Repos */
+    .repos {
+      background: var(--gray-50);
+    }
+
+    .repo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .repo-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .repo-card:hover {
+      border-color: var(--teal);
+      box-shadow: 0 4px 12px rgba(20, 184, 166, 0.1);
+    }
+
+    .repo-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .repo-card p {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+    }
+
+    /* Quick start */
+    .quickstart {
+      background: var(--gray-900);
+      color: white;
+      padding: 4rem 0;
+    }
+
+    .quickstart h2 {
+      color: white;
+    }
+
+    .quickstart pre {
+      background: #1e293b;
+      border-radius: 8px;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .quickstart code {
+      color: #e2e8f0;
+    }
+
+    .quickstart .comment {
+      color: #64748b;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--gray-500);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2rem; }
+      .hero .tagline { font-size: 1rem; }
+      .flow { flex-direction: column; }
+      .flow-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <img src="assets/decodie-logo.png" alt="Decodie">
+  <h1>Decodie</h1>
+  <p class="tagline">Your AI learning companion. Generates structured learning entries as a byproduct of AI-assisted coding sessions.</p>
+  <div class="cta">
+    <a href="#quickstart" class="btn btn-primary">Get Started</a>
+    <a href="https://github.com/owenbush/decodie-skill" class="btn btn-outline">View on GitHub</a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>How it works</h2>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="icon">&#128187;</div>
+        <h3>You code</h3>
+        <p>Write code with Claude Code as usual</p>
+      </div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step">
+        <div class="icon">&#129302;</div>
+        <h3>Decodie observes</h3>
+        <p>Documents decisions, patterns, and concepts</p>
+      </div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step">
+        <div class="icon">&#128218;</div>
+        <h3>You learn</h3>
+        <p>Browse, filter, and ask questions about entries</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Features</h2>
+    <div class="features">
+      <div class="feature">
+        <h3>Automatic documentation</h3>
+        <p>Learning entries are generated as the AI writes code. No extra steps needed.</p>
+      </div>
+      <div class="feature">
+        <h3>Content-based code references</h3>
+        <p>References use function signatures, not line numbers, so they survive refactoring.</p>
+      </div>
+      <div class="feature">
+        <h3>Interactive Q&A</h3>
+        <p>Highlight any text in an entry and ask follow-up questions. Conversations persist.</p>
+      </div>
+      <div class="feature">
+        <h3>Smart filtering</h3>
+        <p>Filter by experience level, topic, decision type, and lifecycle stage.</p>
+      </div>
+      <div class="feature">
+        <h3>External doc links</h3>
+        <p>Automatic links to php.net, MDN, Python docs, Drupal API, and framework docs.</p>
+      </div>
+      <div class="feature">
+        <h3>DDEV integration</h3>
+        <p>Serve the UI as a DDEV service with a clean subdomain URL.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section repos">
+  <div class="container">
+    <h2>Repositories</h2>
+    <div class="repo-grid">
+      <a href="https://github.com/owenbush/decodie-skill" class="repo-card">
+        <h3>decodie-skill</h3>
+        <p>Claude Code skill that generates .decodie/ entries during coding sessions.</p>
+      </a>
+      <a href="https://github.com/owenbush/decodie-ui" class="repo-card">
+        <h3>decodie-ui</h3>
+        <p>Node.js presentation layer with browsing, filtering, Q&A, and syntax highlighting.</p>
+      </a>
+      <a href="https://github.com/owenbush/decodie-ddev" class="repo-card">
+        <h3>decodie-ddev</h3>
+        <p>DDEV add-on that serves the UI at decodie.SITENAME.ddev.site.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="quickstart" id="quickstart">
+  <div class="container">
+    <h2>Quick Start</h2>
+    <pre><code><span class="comment"># 1. Install the skill</span>
+mkdir -p ~/.claude/skills/decodie
+git clone https://github.com/owenbush/decodie-skill.git /tmp/decodie-skill
+cp /tmp/decodie-skill/SKILL.md ~/.claude/skills/decodie/
+cp -r /tmp/decodie-skill/scripts/ ~/.claude/skills/decodie/scripts/
+
+<span class="comment"># 2. Code with Claude Code — entries appear in .decodie/</span>
+
+<span class="comment"># 3. Browse your entries</span>
+git clone https://github.com/owenbush/decodie-ui.git
+cd decodie-ui && npm install
+npx tsx src/cli.ts serve --dir /path/to/your/project
+
+<span class="comment"># 4. Open http://localhost:8081</span></code></pre>
+  </div>
+</section>
+
+<footer>
+  <p>Made by <a href="https://github.com/owenbush">Owen Bush</a></p>
+</footer>
+
+</body>
+</html>
