@@ -311,6 +311,7 @@
     .gallery-slide img {
       width: 100%;
       display: block;
+      cursor: zoom-in;
     }
 
     .gallery-caption {
@@ -369,6 +370,39 @@
 
     .gallery-dot.active {
       background: var(--primary);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      padding: 2rem;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: var(--surface);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      white-space: nowrap;
     }
 
     @media (max-width: 640px) {
@@ -578,6 +612,42 @@
   dotsEl.addEventListener('click', function (e) {
     var idx = e.target.getAttribute('data-index');
     if (idx !== null) goTo(parseInt(idx, 10));
+  });
+
+  // Lightbox
+  track.addEventListener('click', function (e) {
+    var img = e.target.closest('img');
+    if (!img) return;
+    var slide = img.closest('.gallery-slide');
+    var caption = slide ? slide.querySelector('.gallery-caption') : null;
+
+    var overlay = document.createElement('div');
+    overlay.className = 'lightbox';
+
+    var fullImg = document.createElement('img');
+    fullImg.src = img.src;
+    fullImg.alt = img.alt;
+    overlay.appendChild(fullImg);
+
+    if (caption) {
+      var cap = document.createElement('div');
+      cap.className = 'lightbox-caption';
+      cap.textContent = caption.textContent;
+      overlay.appendChild(cap);
+    }
+
+    overlay.addEventListener('click', function () {
+      document.body.removeChild(overlay);
+    });
+
+    document.addEventListener('keydown', function onKey(e) {
+      if (e.key === 'Escape') {
+        if (overlay.parentNode) document.body.removeChild(overlay);
+        document.removeEventListener('keydown', onKey);
+      }
+    });
+
+    document.body.appendChild(overlay);
   });
 })();
 </script>
