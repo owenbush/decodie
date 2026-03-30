@@ -129,10 +129,14 @@
     .flow {
       display: flex;
       gap: 1rem;
-      align-items: center;
+      align-items: stretch;
       justify-content: center;
       flex-wrap: wrap;
       margin-bottom: 2rem;
+    }
+
+    .flow-arrow {
+      align-self: center;
     }
 
     .flow-step {
@@ -324,7 +328,7 @@
       <div class="flow-step">
         <div class="icon"><i class="fa-solid fa-graduation-cap"></i></div>
         <h3>You learn</h3>
-        <p>Browse, filter, and ask questions</p>
+        <p>Follow lessons, track progress, and ask questions</p>
       </div>
     </div>
   </div>
@@ -339,20 +343,32 @@
         <p>Learning entries are generated as the AI writes code. No extra steps needed.</p>
       </div>
       <div class="feature">
-        <h3>Content-based code references</h3>
-        <p>References use function signatures, not line numbers, so they survive refactoring.</p>
+        <h3>Structured lessons</h3>
+        <p>Entries are automatically grouped into topic-based lessons, sorted by difficulty. Create custom lessons with your own ordering and notes.</p>
+      </div>
+      <div class="feature">
+        <h3>Progress tracking</h3>
+        <p>Mark entries as learned and track your progress through each lesson with visual progress indicators.</p>
       </div>
       <div class="feature">
         <h3>Interactive Q&A</h3>
         <p>Highlight any text in an entry and ask follow-up questions. Conversations persist across sessions.</p>
       </div>
       <div class="feature">
+        <h3>Content-based code references</h3>
+        <p>References use function signatures, not line numbers, so they survive refactoring.</p>
+      </div>
+      <div class="feature">
         <h3>Smart filtering</h3>
-        <p>Filter by experience level, topic, decision type, and lifecycle stage.</p>
+        <p>Filter by experience level, topic, decision type, and lifecycle stage. Switch between lesson and entry views.</p>
       </div>
       <div class="feature">
         <h3>External doc links</h3>
         <p>Automatic links to php.net, MDN, Python docs, Drupal API, and framework docs.</p>
+      </div>
+      <div class="feature">
+        <h3>Sequential navigation</h3>
+        <p>Step through lessons entry by entry with next/previous controls. A sidebar outline shows your position and lets you jump to any entry.</p>
       </div>
       <div class="feature">
         <h3>DDEV integration</h3>
@@ -372,7 +388,7 @@
       </a>
       <a href="https://github.com/owenbush/decodie-ui" class="repo-card">
         <h3>decodie-ui</h3>
-        <p>Node.js presentation layer with browsing, filtering, Q&A, and syntax highlighting.</p>
+        <p>Node.js presentation layer with lessons, progress tracking, browsing, filtering, and Q&A.</p>
       </a>
       <a href="https://github.com/owenbush/decodie-ddev" class="repo-card">
         <h3>decodie-ddev</h3>
