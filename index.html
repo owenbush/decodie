@@ -562,11 +562,14 @@
 <span class="comment"># 2. Code with Claude Code — entries appear in .decodie/</span>
 
 <span class="comment"># 3. Browse your entries</span>
-<span class="cmd">git clone https://github.com/owenbush/decodie-ui.git</span>
-<span class="cmd">cd decodie-ui && npm install</span>
-<span class="cmd">npx tsx src/cli.ts serve --dir /path/to/your/project</span>
+<span class="cmd">npx @owenbush/decodie-ui serve --dir /path/to/your/project</span>
 
-<span class="comment"># 4. Open http://localhost:8081</span></code></pre>
+<span class="comment"># 4. Open http://localhost:8081</span>
+
+<span class="comment"># -- or with DDEV --</span>
+<span class="cmd">ddev add-on get owenbush/decodie-ddev</span>
+<span class="cmd">ddev restart</span>
+<span class="cmd">ddev decodie</span></code></pre>
   </div>
 </section>
 

@@ -2,7 +2,7 @@
 
 # Decodie
 
-Your AI learning companion. This repo hosts the [Decodie website](https://owenbush.github.io/decodie), which explains the project and how to get started.
+Your AI learning companion. This repo hosts the [Decodie website](https://decodie.owenbush.dev), which explains the project and how to get started.
 
 ## Repositories
 
