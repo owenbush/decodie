@@ -288,12 +288,97 @@
       color: var(--accent);
     }
 
+    /* Gallery */
+    .gallery {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .gallery-track {
+      display: flex;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+    }
+
+    .gallery-slide {
+      min-width: 100%;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-slide img {
+      width: 100%;
+      display: block;
+    }
+
+    .gallery-caption {
+      padding: 0.75rem 1rem;
+      background: var(--surface);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .gallery-btn {
+      position: absolute;
+      top: calc(50% - 20px);
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      box-shadow: var(--shadow);
+    }
+
+    .gallery-btn:hover {
+      background: var(--surface-hover);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .gallery-prev { left: -20px; }
+    .gallery-next { right: -20px; }
+
+    .gallery-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .gallery-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s;
+    }
+
+    .gallery-dot.active {
+      background: var(--primary);
+    }
+
     @media (max-width: 640px) {
       .hero h1 { font-size: 2rem; }
       .hero .tagline { font-size: 1rem; }
       .hero { padding: 4rem 1.5rem 3rem; }
       .flow { flex-direction: column; }
       .flow-arrow { transform: rotate(90deg); }
+      .gallery-prev { left: 8px; }
+      .gallery-next { right: 8px; }
     }
   </style>
 </head>
@@ -330,6 +415,39 @@
         <h3>You learn</h3>
         <p>Follow lessons, track progress, and ask questions</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>See it in action</h2>
+    <div class="gallery">
+      <div class="gallery-track" id="galleryTrack">
+        <div class="gallery-slide">
+          <img src="assets/screenshot-lessons.png" alt="Lessons view showing topic-based lesson cards with progress indicators">
+          <div class="gallery-caption">Lessons view &mdash; topic-based lessons with progress tracking</div>
+        </div>
+        <div class="gallery-slide">
+          <img src="assets/screenshot-lesson-detail.png" alt="Lesson detail showing ordered entries with sidebar outline">
+          <div class="gallery-caption">Lesson detail &mdash; ordered entries with sidebar outline</div>
+        </div>
+        <div class="gallery-slide">
+          <img src="assets/screenshot-entry.png" alt="Entry detail with code snippet, explanation, and lesson navigation">
+          <div class="gallery-caption">Entry detail &mdash; code snippets, explanations, and lesson navigation</div>
+        </div>
+        <div class="gallery-slide">
+          <img src="assets/screenshot-entries.png" alt="Entries list with filtering by level, topic, and type">
+          <div class="gallery-caption">Entries view &mdash; filter by level, topic, type, and lifecycle</div>
+        </div>
+        <div class="gallery-slide">
+          <img src="assets/screenshot-qa.png" alt="Interactive Q&A panel with conversation context">
+          <div class="gallery-caption">Interactive Q&amp;A &mdash; ask follow-up questions about any entry</div>
+        </div>
+      </div>
+      <button class="gallery-btn gallery-prev" id="galleryPrev" aria-label="Previous screenshot"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="gallery-btn gallery-next" id="galleryNext" aria-label="Next screenshot"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="gallery-dots" id="galleryDots"></div>
     </div>
   </div>
 </section>
@@ -421,6 +539,48 @@
 <footer>
   <p>Made by <a href="https://github.com/owenbush">Owen Bush</a></p>
 </footer>
+
+<script>
+(function () {
+  var track = document.getElementById('galleryTrack');
+  var slides = track.querySelectorAll('.gallery-slide');
+  var prevBtn = document.getElementById('galleryPrev');
+  var nextBtn = document.getElementById('galleryNext');
+  var dotsEl = document.getElementById('galleryDots');
+  var current = 0;
+  var count = slides.length;
+
+  // Create dots
+  for (var i = 0; i < count; i++) {
+    var dot = document.createElement('button');
+    dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to screenshot ' + (i + 1));
+    dot.setAttribute('data-index', i);
+    dotsEl.appendChild(dot);
+  }
+
+  var dots = dotsEl.querySelectorAll('.gallery-dot');
+
+  function goTo(index) {
+    if (index < 0) index = count - 1;
+    if (index >= count) index = 0;
+    current = index;
+    for (var j = 0; j < slides.length; j++) {
+      slides[j].style.transform = 'translateX(-' + (current * 100) + '%)';
+    }
+    for (var k = 0; k < dots.length; k++) {
+      dots[k].className = 'gallery-dot' + (k === current ? ' active' : '');
+    }
+  }
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+  dotsEl.addEventListener('click', function (e) {
+    var idx = e.target.getAttribute('data-index');
+    if (idx !== null) goTo(parseInt(idx, 10));
+  });
+})();
+</script>
 
 </body>
 </html>
