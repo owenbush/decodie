@@ -6,25 +6,41 @@
   <title>Decodie - Your AI Learning Companion</title>
   <meta name="description" content="Decodie generates structured learning entries as a byproduct of AI-assisted coding sessions, helping developers understand what was built, how, and why.">
   <link rel="icon" type="image/png" href="assets/decodie-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
-      --teal: #14b8a6;
-      --teal-dark: #0d9488;
-      --teal-light: #f0fdfa;
-      --gray-50: #f9fafb;
-      --gray-100: #f3f4f6;
-      --gray-200: #e5e7eb;
-      --gray-500: #6b7280;
-      --gray-700: #374151;
-      --gray-900: #111827;
+      --bg: #1f2831;
+      --bg-deep: #1a2229;
+      --surface: #263240;
+      --surface-hover: #2d3b4a;
+      --border: #344455;
+      --text: #e2eaf2;
+      --text-muted: #87abc5;
+      --text-light: #5e7d96;
+      --primary: #0786f7;
+      --primary-hover: #0670d4;
+      --primary-glow: rgba(7, 134, 247, 0.15);
+      --accent: #90e1e4;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      color: var(--gray-900);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
+    }
+
+    code, pre {
+      font-family: 'JetBrains Mono', monospace;
     }
 
     .container {
@@ -36,8 +52,8 @@
     /* Hero */
     .hero {
       text-align: center;
-      padding: 5rem 1.5rem 4rem;
-      background: linear-gradient(180deg, var(--teal-light) 0%, white 100%);
+      padding: 6rem 1.5rem 5rem;
+      background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 100%);
     }
 
     .hero img {
@@ -50,14 +66,14 @@
       font-size: 3rem;
       font-weight: 700;
       margin-bottom: 0.75rem;
-      color: var(--gray-900);
+      color: var(--text);
     }
 
     .hero .tagline {
-      font-size: 1.25rem;
-      color: var(--gray-500);
-      max-width: 600px;
-      margin: 0 auto 2rem;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
     }
 
     .hero .cta {
@@ -70,43 +86,46 @@
     .btn {
       display: inline-block;
       padding: 0.75rem 1.5rem;
-      border-radius: 8px;
+      border-radius: var(--radius);
       text-decoration: none;
       font-weight: 500;
       font-size: 1rem;
-      transition: all 0.15s;
+      transition: all 0.2s;
     }
 
     .btn-primary {
-      background: var(--teal);
+      background: var(--primary);
       color: white;
     }
 
     .btn-primary:hover {
-      background: var(--teal-dark);
+      background: var(--primary-hover);
+      box-shadow: 0 0 20px var(--primary-glow);
     }
 
     .btn-outline {
-      border: 2px solid var(--gray-200);
-      color: var(--gray-700);
+      border: 2px solid var(--border);
+      color: var(--text-muted);
     }
 
     .btn-outline:hover {
-      border-color: var(--teal);
-      color: var(--teal);
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
-    /* How it works */
+    /* Sections */
     .section {
-      padding: 4rem 0;
+      padding: 5rem 0;
     }
 
     .section h2 {
       font-size: 2rem;
       text-align: center;
       margin-bottom: 2.5rem;
+      color: var(--text);
     }
 
+    /* How it works */
     .flow {
       display: flex;
       gap: 1rem;
@@ -117,32 +136,35 @@
     }
 
     .flow-step {
-      background: white;
-      border: 1px solid var(--gray-200);
-      border-radius: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
       padding: 1.5rem;
       text-align: center;
       width: 200px;
+      box-shadow: var(--shadow);
     }
 
     .flow-step .icon {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+      color: var(--primary);
     }
 
     .flow-step h3 {
       font-size: 1rem;
       margin-bottom: 0.25rem;
+      color: var(--accent);
     }
 
     .flow-step p {
       font-size: 0.85rem;
-      color: var(--gray-500);
+      color: var(--text-muted);
     }
 
     .flow-arrow {
       font-size: 1.5rem;
-      color: var(--gray-200);
+      color: var(--text-light);
     }
 
     /* Features */
@@ -154,25 +176,31 @@
 
     .feature {
       padding: 1.5rem;
-      border: 1px solid var(--gray-200);
-      border-radius: 12px;
-      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      transition: border-color 0.2s;
+    }
+
+    .feature:hover {
+      border-color: var(--primary);
     }
 
     .feature h3 {
-      font-size: 1.1rem;
+      font-size: 1rem;
       margin-bottom: 0.5rem;
-      color: var(--teal-dark);
+      color: var(--accent);
     }
 
     .feature p {
       font-size: 0.9rem;
-      color: var(--gray-500);
+      color: var(--text-muted);
     }
 
     /* Repos */
     .repos {
-      background: var(--gray-50);
+      background: var(--bg-deep);
     }
 
     .repo-grid {
@@ -182,76 +210,84 @@
     }
 
     .repo-card {
-      background: white;
-      border: 1px solid var(--gray-200);
-      border-radius: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
       padding: 1.5rem;
       text-decoration: none;
       color: inherit;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow);
     }
 
     .repo-card:hover {
-      border-color: var(--teal);
-      box-shadow: 0 4px 12px rgba(20, 184, 166, 0.1);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md);
     }
 
     .repo-card h3 {
       font-size: 1rem;
       margin-bottom: 0.35rem;
+      color: var(--text);
     }
 
     .repo-card p {
       font-size: 0.85rem;
-      color: var(--gray-500);
+      color: var(--text-muted);
     }
 
     /* Quick start */
     .quickstart {
-      background: var(--gray-900);
-      color: white;
-      padding: 4rem 0;
-    }
-
-    .quickstart h2 {
-      color: white;
+      background: var(--bg-deep);
     }
 
     .quickstart pre {
-      background: #1e293b;
-      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
       padding: 1.5rem;
       overflow-x: auto;
-      font-size: 0.9rem;
-      line-height: 1.8;
+      font-size: 0.85rem;
+      line-height: 1.9;
       max-width: 640px;
       margin: 0 auto;
+      box-shadow: var(--shadow);
     }
 
     .quickstart code {
-      color: #e2e8f0;
+      color: var(--text);
     }
 
     .quickstart .comment {
-      color: #64748b;
+      color: var(--text-light);
+    }
+
+    .quickstart .cmd {
+      color: var(--accent);
     }
 
     /* Footer */
     footer {
       text-align: center;
-      padding: 2rem;
-      color: var(--gray-500);
+      padding: 2.5rem;
+      color: var(--text-light);
       font-size: 0.85rem;
+      border-top: 1px solid var(--border);
     }
 
     footer a {
-      color: var(--teal);
+      color: var(--primary);
       text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--accent);
     }
 
     @media (max-width: 640px) {
       .hero h1 { font-size: 2rem; }
       .hero .tagline { font-size: 1rem; }
+      .hero { padding: 4rem 1.5rem 3rem; }
       .flow { flex-direction: column; }
       .flow-arrow { transform: rotate(90deg); }
     }
@@ -262,7 +298,7 @@
 <section class="hero">
   <img src="assets/decodie-logo.png" alt="Decodie">
   <h1>Decodie</h1>
-  <p class="tagline">Your AI learning companion. Generates structured learning entries as a byproduct of AI-assisted coding sessions.</p>
+  <p class="tagline">Your AI learning companion. Turn every coding session into a structured learning trail.</p>
   <div class="cta">
     <a href="#quickstart" class="btn btn-primary">Get Started</a>
     <a href="https://github.com/owenbush/decodie-skill" class="btn btn-outline">View on GitHub</a>
@@ -274,21 +310,21 @@
     <h2>How it works</h2>
     <div class="flow">
       <div class="flow-step">
-        <div class="icon">&#128187;</div>
+        <div class="icon"><i class="fa-solid fa-code"></i></div>
         <h3>You code</h3>
         <p>Write code with Claude Code as usual</p>
       </div>
-      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
       <div class="flow-step">
-        <div class="icon">&#129302;</div>
+        <div class="icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
         <h3>Decodie observes</h3>
         <p>Documents decisions, patterns, and concepts</p>
       </div>
-      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
       <div class="flow-step">
-        <div class="icon">&#128218;</div>
+        <div class="icon"><i class="fa-solid fa-graduation-cap"></i></div>
         <h3>You learn</h3>
-        <p>Browse, filter, and ask questions about entries</p>
+        <p>Browse, filter, and ask questions</p>
       </div>
     </div>
   </div>
@@ -308,7 +344,7 @@
       </div>
       <div class="feature">
         <h3>Interactive Q&A</h3>
-        <p>Highlight any text in an entry and ask follow-up questions. Conversations persist.</p>
+        <p>Highlight any text in an entry and ask follow-up questions. Conversations persist across sessions.</p>
       </div>
       <div class="feature">
         <h3>Smart filtering</h3>
@@ -320,7 +356,7 @@
       </div>
       <div class="feature">
         <h3>DDEV integration</h3>
-        <p>Serve the UI as a DDEV service with a clean subdomain URL.</p>
+        <p>Serve the UI as a DDEV service at decodie.yoursite.ddev.site.</p>
       </div>
     </div>
   </div>
@@ -346,21 +382,21 @@
   </div>
 </section>
 
-<section class="quickstart" id="quickstart">
+<section class="section quickstart" id="quickstart">
   <div class="container">
     <h2>Quick Start</h2>
     <pre><code><span class="comment"># 1. Install the skill</span>
-mkdir -p ~/.claude/skills/decodie
-git clone https://github.com/owenbush/decodie-skill.git /tmp/decodie-skill
-cp /tmp/decodie-skill/SKILL.md ~/.claude/skills/decodie/
-cp -r /tmp/decodie-skill/scripts/ ~/.claude/skills/decodie/scripts/
+<span class="cmd">mkdir -p ~/.claude/skills/decodie</span>
+<span class="cmd">git clone https://github.com/owenbush/decodie-skill.git /tmp/decodie-skill</span>
+<span class="cmd">cp /tmp/decodie-skill/SKILL.md ~/.claude/skills/decodie/</span>
+<span class="cmd">cp -r /tmp/decodie-skill/scripts/ ~/.claude/skills/decodie/scripts/</span>
 
 <span class="comment"># 2. Code with Claude Code — entries appear in .decodie/</span>
 
 <span class="comment"># 3. Browse your entries</span>
-git clone https://github.com/owenbush/decodie-ui.git
-cd decodie-ui && npm install
-npx tsx src/cli.ts serve --dir /path/to/your/project
+<span class="cmd">git clone https://github.com/owenbush/decodie-ui.git</span>
+<span class="cmd">cd decodie-ui && npm install</span>
+<span class="cmd">npx tsx src/cli.ts serve --dir /path/to/your/project</span>
 
 <span class="comment"># 4. Open http://localhost:8081</span></code></pre>
   </div>
