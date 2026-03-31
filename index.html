@@ -492,7 +492,7 @@
     <div class="features">
       <div class="feature">
         <h3>Automatic documentation</h3>
-        <p>Learning entries are generated as the AI writes code. No extra steps needed. Use <code>/decodie</code> to activate.</p>
+        <p>Learning entries are generated as the AI writes code. No extra steps needed. Use <code>/decodie:observe</code> to activate.</p>
       </div>
       <div class="feature">
         <h3>Structured lessons</h3>
@@ -516,7 +516,7 @@
       </div>
       <div class="feature">
         <h3>Analyze existing code</h3>
-        <p>Run <code>/decodie-analyze</code> to generate entries from code you didn't write with Claude. Works on files, directories, or whole projects.</p>
+        <p>Run <code>/decodie:analyze</code> to generate entries from code you didn't write with Claude. Works on files, directories, or whole projects.</p>
       </div>
       <div class="feature">
         <h3>External doc links</h3>
@@ -553,15 +553,15 @@
 <section class="section quickstart" id="quickstart">
   <div class="container">
     <h2>Quick Start</h2>
-    <pre><code><span class="comment"># 1. Install the skill + UI</span>
+    <pre><code><span class="comment"># 1. Install the commands + UI</span>
 <span class="cmd">npx @owenbush/decodie-ui install-skill</span>
 
-<span class="comment"># 2. Activate the skill in Claude Code</span>
-<span class="cmd">/decodie</span>
+<span class="comment"># 2. In Claude Code, start documenting</span>
+<span class="cmd">/decodie:observe</span>
 
 <span class="comment"># 3. Code as usual — entries appear in .decodie/</span>
 <span class="comment">#    Or analyze existing code:</span>
-<span class="cmd">/decodie-analyze src/</span>
+<span class="cmd">/decodie:analyze src/</span>
 
 <span class="comment"># 4. Browse your entries</span>
 <span class="cmd">npx @owenbush/decodie-ui serve</span>
