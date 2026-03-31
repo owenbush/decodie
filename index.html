@@ -492,7 +492,7 @@
     <div class="features">
       <div class="feature">
         <h3>Automatic documentation</h3>
-        <p>Learning entries are generated as the AI writes code. No extra steps needed.</p>
+        <p>Learning entries are generated as the AI writes code. No extra steps needed. Use <code>/decodie</code> to activate.</p>
       </div>
       <div class="feature">
         <h3>Structured lessons</h3>
@@ -513,6 +513,10 @@
       <div class="feature">
         <h3>Smart filtering</h3>
         <p>Filter by experience level, topic, decision type, and lifecycle stage. Switch between lesson and entry views.</p>
+      </div>
+      <div class="feature">
+        <h3>Analyze existing code</h3>
+        <p>Run <code>/decodie-analyze</code> to generate entries from code you didn't write with Claude. Works on files, directories, or whole projects.</p>
       </div>
       <div class="feature">
         <h3>External doc links</h3>
@@ -536,7 +540,7 @@
     <div class="repo-grid">
       <a href="https://github.com/owenbush/decodie-skill" class="repo-card">
         <h3>decodie-skill</h3>
-        <p>Claude Code skill that generates .decodie/ entries during coding sessions.</p>
+        <p>Claude Code skills for generating and analyzing .decodie/ entries.</p>
       </a>
       <a href="https://github.com/owenbush/decodie-ui" class="repo-card">
         <h3>decodie-ui</h3>
@@ -560,6 +564,8 @@
 <span class="cmd">/decodie</span>
 
 <span class="comment"># 3. Code as usual — entries appear in .decodie/</span>
+<span class="comment">#    Or analyze existing code:</span>
+<span class="cmd">/decodie-analyze src/</span>
 
 <span class="comment"># 4. Browse your entries</span>
 <span class="cmd">npx @owenbush/decodie-ui serve</span>
