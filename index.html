@@ -791,6 +791,10 @@
         <p>Automatic links to php.net, MDN, Python docs, Drupal API, and framework docs.</p>
       </div>
       <div class="feature">
+        <h3>VSCode extension</h3>
+        <p>Browse entries in a sidebar as you navigate code. Right-click to analyze selections or files with Claude.</p>
+      </div>
+      <div class="feature">
         <h3>DDEV integration</h3>
         <p>Serve the UI as a DDEV service at decodie.yoursite.ddev.site.</p>
       </div>
@@ -814,6 +818,14 @@
         <h3>decodie-ddev</h3>
         <p>DDEV add-on that serves the UI at decodie.SITENAME.ddev.site.</p>
       </a>
+      <a href="https://github.com/owenbush/decodie-vscode" class="repo-card">
+        <h3>decodie-vscode</h3>
+        <p>VSCode extension with sidebar entry browser, right-click analysis, and gutter decorations.</p>
+      </a>
+      <a href="https://github.com/owenbush/decodie-core" class="repo-card">
+        <h3>decodie-core</h3>
+        <p>Shared data layer — types, parser, and reference resolver used by the UI and VSCode extension.</p>
+      </a>
     </div>
   </div>
 </section>
@@ -833,6 +845,9 @@
 
 <span class="comment"># 4. Browse your entries</span>
 <span class="cmd">npx @owenbush/decodie-ui serve</span>
+
+<span class="comment"># -- or browse entries in VSCode --</span>
+<span class="comment"># Install the Decodie extension from the VSCode Marketplace</span>
 
 <span class="comment"># -- or with DDEV (installs everything automatically) --</span>
 <span class="cmd">ddev add-on get owenbush/decodie-ddev</span>
