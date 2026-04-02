@@ -115,7 +115,7 @@
 
     /* Sections */
     .section {
-      padding: 5rem 0;
+      padding: 3rem 0;
     }
 
     .section h2 {
@@ -288,6 +288,180 @@
       color: var(--accent);
     }
 
+    /* How it works — dual flow */
+    .dual-flow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .dual-flow-column {
+      text-align: center;
+    }
+
+    .dual-flow-column h3 {
+      font-size: 1.15rem;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .dual-flow-column h3 code {
+      font-size: 1rem;
+    }
+
+    .dual-flow-column .flow-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 1.25rem;
+    }
+
+    .dual-flow-column .flow {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dual-flow-column .flow-step {
+      width: 100%;
+      max-width: 260px;
+    }
+
+    .dual-flow-column .flow-arrow {
+      transform: none;
+    }
+
+    /* Commands */
+    .commands-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .command-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .command-card h3 {
+      font-size: 1.15rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .command-card h3 code {
+      font-size: 1.05rem;
+    }
+
+    .command-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .command-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1rem;
+    }
+
+    .command-card ul li {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      padding: 0.3rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .command-card ul li::before {
+      content: '\2022';
+      color: var(--primary);
+      position: absolute;
+      left: 0;
+    }
+
+    .command-card h4 {
+      font-size: 0.95rem;
+      color: var(--text);
+      margin: 1.25rem 0 0.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .command-card pre {
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin: 0.5rem 0;
+    }
+
+    .command-card pre code {
+      color: var(--text);
+    }
+
+    .command-card .flag {
+      display: inline-block;
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.1rem 0.4rem;
+      font-size: 0.8rem;
+      color: var(--accent);
+    }
+
+    .annotation-table {
+      width: 100%;
+      font-size: 0.8rem;
+      border-collapse: collapse;
+      margin: 0.5rem 0;
+    }
+
+    .annotation-table th {
+      text-align: left;
+      color: var(--text);
+      padding: 0.4rem 0.5rem;
+      border-bottom: 1px solid var(--border);
+      font-weight: 500;
+    }
+
+    .annotation-table td {
+      color: var(--text-muted);
+      padding: 0.35rem 0.5rem;
+      border-bottom: 1px solid rgba(52, 68, 85, 0.4);
+    }
+
+    .annotation-table code {
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+
+    .command-ask {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .command-ask h3 {
+      font-size: 1rem;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .command-ask p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
     /* Gallery */
     .gallery {
       position: relative;
@@ -411,6 +585,8 @@
       .hero { padding: 4rem 1.5rem 3rem; }
       .flow { flex-direction: column; }
       .flow-arrow { transform: rotate(90deg); }
+      .dual-flow { grid-template-columns: 1fr; gap: 3rem; }
+      .commands-grid { grid-template-columns: 1fr; }
       .gallery-prev { left: 8px; }
       .gallery-next { right: 8px; }
     }
@@ -431,23 +607,52 @@
 <section class="section">
   <div class="container">
     <h2>How it works</h2>
-    <div class="flow">
-      <div class="flow-step">
-        <div class="icon"><i class="fa-solid fa-code"></i></div>
-        <h3>You code</h3>
-        <p>Write code with Claude Code as usual</p>
+    <div class="dual-flow">
+      <div class="dual-flow-column">
+        <h3><code>/decodie:observe</code></h3>
+        <p class="flow-subtitle">Real-time &mdash; documents as you code</p>
+        <div class="flow">
+          <div class="flow-step">
+            <div class="icon"><i class="fa-solid fa-play"></i></div>
+            <h3>Activate</h3>
+            <p>Run <code>/decodie:observe</code> to start a session</p>
+          </div>
+          <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+          <div class="flow-step">
+            <div class="icon"><i class="fa-solid fa-code"></i></div>
+            <h3>Code as usual</h3>
+            <p>Write code with Claude Code normally</p>
+          </div>
+          <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+          <div class="flow-step">
+            <div class="icon"><i class="fa-solid fa-pen-to-square"></i></div>
+            <h3>Entries appear</h3>
+            <p>Decisions are documented in real-time</p>
+          </div>
+        </div>
       </div>
-      <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-      <div class="flow-step">
-        <div class="icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-        <h3>Decodie observes</h3>
-        <p>Documents decisions, patterns, and concepts</p>
-      </div>
-      <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-      <div class="flow-step">
-        <div class="icon"><i class="fa-solid fa-graduation-cap"></i></div>
-        <h3>You learn</h3>
-        <p>Follow lessons, track progress, and ask questions</p>
+      <div class="dual-flow-column">
+        <h3><code>/decodie:analyze</code></h3>
+        <p class="flow-subtitle">Retroactive &mdash; analyzes existing code</p>
+        <div class="flow">
+          <div class="flow-step">
+            <div class="icon"><i class="fa-solid fa-crosshairs"></i></div>
+            <h3>Point at code</h3>
+            <p>Target a file, directory, or whole project</p>
+          </div>
+          <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+          <div class="flow-step">
+            <div class="icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+            <h3>Decodie reads</h3>
+            <p>Infers patterns, rationale, and decisions</p>
+          </div>
+          <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+          <div class="flow-step">
+            <div class="icon"><i class="fa-solid fa-layer-group"></i></div>
+            <h3>Batch generated</h3>
+            <p>Entries produced for the entire target</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -488,11 +693,74 @@
 
 <section class="section">
   <div class="container">
+    <h2>Commands</h2>
+    <div class="commands-grid">
+      <div class="command-card">
+        <h3><code>/decodie:observe</code></h3>
+        <p>Activate at the start of a coding session. The agent documents decisions, patterns, and concepts as it writes code in real-time.</p>
+        <ul>
+          <li>Entries are written after each meaningful decision, interleaved with coding</li>
+          <li>Tracks session start/end with automatic session IDs</li>
+          <li>Detects duplicates and cross-references related entries</li>
+          <li>Marks entries as superseded when referenced code is rewritten or removed</li>
+          <li>Links to external documentation (MDN, php.net, React docs, etc.)</li>
+        </ul>
+        <pre><code><span class="cmd">/decodie:observe</span>
+<span class="comment"># then code as usual</span></code></pre>
+      </div>
+      <div class="command-card">
+        <h3><code>/decodie:analyze</code></h3>
+        <p>Generate learning entries from existing code &mdash; even code that wasn't written with Claude. Read-only: never modifies source files.</p>
+        <ul>
+          <li>Target a single file, a directory, or an entire project</li>
+          <li><strong>Selective mode</strong> (default): picks the 3&ndash;5 most significant patterns per file</li>
+          <li><strong>Exhaustive mode</strong> (<code class="flag">--exhaustive</code>): documents every meaningful pattern without per-file limits</li>
+          <li>Analysis sessions are prefixed <code>analyze-</code> so you can distinguish them</li>
+          <li>Same duplicate detection and cross-referencing as observe</li>
+        </ul>
+        <pre><code><span class="cmd">/decodie:analyze src/auth/</span>
+<span class="cmd">/decodie:analyze src/utils/helpers.ts</span>
+<span class="cmd">/decodie:analyze --exhaustive src/</span></code></pre>
+        <h4>Source annotations</h4>
+        <p>Place annotation markers in source code comments to control what gets analyzed. These work in both selective and exhaustive modes.</p>
+        <table class="annotation-table">
+          <thead>
+            <tr><th>Marker</th><th>Scope</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>@decodie-include:file</code></td><td>Entire file</td></tr>
+            <tr><td><code>@decodie-include:class</code></td><td>Next class/interface/enum</td></tr>
+            <tr><td><code>@decodie-include:function</code></td><td>Next function/method</td></tr>
+            <tr><td><code>@decodie-include:start/end</code></td><td>Block region</td></tr>
+            <tr><td><code>@decodie-ignore:file</code></td><td>Entire file</td></tr>
+            <tr><td><code>@decodie-ignore:class</code></td><td>Next class/interface/enum</td></tr>
+            <tr><td><code>@decodie-ignore:function</code></td><td>Next function/method</td></tr>
+            <tr><td><code>@decodie-ignore:start/end</code></td><td>Block region</td></tr>
+          </tbody>
+        </table>
+        <p><code>@decodie-ignore</code> always takes precedence over <code>@decodie-include</code> when scopes overlap. <code>@decodie-include</code> entries don't count against the 3&ndash;5 limit in selective mode.</p>
+        <pre><code><span class="comment">// @decodie-ignore:class</span>
+<span style="color:var(--text-light)">class GeneratedHandler { ... }</span>
+
+<span class="comment"># @decodie-include:function</span>
+<span style="color:var(--text-light)">def calculate_risk_score(portfolio):</span>
+    <span style="color:var(--text-light)">...</span></code></pre>
+      </div>
+    </div>
+    <div class="command-ask">
+      <h3><code>/decodie:ask</code></h3>
+      <p>Query existing learning entries by keyword or entry ID. Answers using entry content and live source code as context.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
     <h2>Features</h2>
     <div class="features">
       <div class="feature">
         <h3>Automatic documentation</h3>
-        <p>Learning entries are generated as the AI writes code. No extra steps needed. Use <code>/decodie:observe</code> to activate.</p>
+        <p>Learning entries are generated as the AI writes code with <code>/decodie:observe</code>, or retroactively from existing code with <code>/decodie:analyze</code>.</p>
       </div>
       <div class="feature">
         <h3>Structured lessons</h3>
@@ -515,8 +783,8 @@
         <p>Filter by experience level, topic, decision type, and lifecycle stage. Switch between lesson and entry views.</p>
       </div>
       <div class="feature">
-        <h3>Analyze existing code</h3>
-        <p>Run <code>/decodie:analyze</code> to generate entries from code you didn't write with Claude. Works on files, directories, or whole projects.</p>
+        <h3>Source annotations</h3>
+        <p>Control what <code>/decodie:analyze</code> documents with <code>@decodie-include</code> and <code>@decodie-ignore</code> markers in source comments.</p>
       </div>
       <div class="feature">
         <h3>External doc links</h3>
