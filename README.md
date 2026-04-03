@@ -11,7 +11,7 @@ Your AI learning companion. This repo hosts the [Decodie website](https://decodi
 | [decodie-skill](https://github.com/owenbush/decodie-skill) | Claude Code skill that generates learning entries |
 | [decodie-ui](https://github.com/owenbush/decodie-ui) | Presentation layer (Node.js web app) |
 | [decodie-ddev](https://github.com/owenbush/decodie-ddev) | DDEV add-on |
-| [decodie-vscode](https://github.com/owenbush/decodie-vscode) | VSCode extension |
+| [decodie-vscode](https://github.com/owenbush/decodie-vscode) | VSCode extension ([Marketplace](https://marketplace.visualstudio.com/items?itemName=owenbush.decodie-vscode)) |
 | [decodie-core](https://github.com/owenbush/decodie-core) | Shared data layer (types, parser, reference resolver) |
 
 ## Development
