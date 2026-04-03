@@ -17,6 +17,7 @@
       --surface: #263240;
       --surface-hover: #2d3b4a;
       --border: #344455;
+      --border-light: #3d4f62;
       --text: #e2eaf2;
       --text-muted: #87abc5;
       --text-light: #5e7d96;
@@ -24,13 +25,20 @@
       --primary-hover: #0670d4;
       --primary-glow: rgba(7, 134, 247, 0.15);
       --accent: #90e1e4;
+      --accent-dim: rgba(144, 225, 228, 0.08);
+      --green: #34d399;
+      --purple: #a78bfa;
+      --amber: #fbbf24;
       --radius: 8px;
       --radius-lg: 12px;
       --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
       --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.4);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 60px; }
 
     body {
       font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -39,554 +47,357 @@
       line-height: 1.6;
     }
 
-    code, pre {
-      font-family: 'JetBrains Mono', monospace;
-    }
+    code, pre { font-family: 'JetBrains Mono', monospace; }
 
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { color: var(--accent); }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ── Nav ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(26, 34, 41, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
       padding: 0 1.5rem;
     }
-
-    /* Hero */
-    .hero {
-      text-align: center;
-      padding: 6rem 1.5rem 5rem;
-      background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 100%);
+    .nav-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 52px;
     }
-
-    .hero img {
-      width: 120px;
-      height: 120px;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-      color: var(--text);
-    }
-
-    .hero .tagline {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      max-width: 580px;
-      margin: 0 auto 2.5rem;
-    }
-
-    .hero .cta {
-      display: inline-flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      border-radius: var(--radius);
+    .nav-brand {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-weight: 700; font-size: 1rem; color: var(--text);
       text-decoration: none;
-      font-weight: 500;
-      font-size: 1rem;
-      transition: all 0.2s;
     }
-
-    .btn-primary {
-      background: var(--primary);
-      color: white;
+    .nav-brand img { width: 26px; height: 26px; }
+    .nav-links { display: flex; gap: 0.25rem; }
+    .nav-links a {
+      color: var(--text-muted); font-size: 0.8rem; font-weight: 500;
+      padding: 0.35rem 0.65rem; border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+      text-decoration: none;
     }
+    .nav-links a:hover { color: var(--text); background: var(--surface); }
 
-    .btn-primary:hover {
-      background: var(--primary-hover);
-      box-shadow: 0 0 20px var(--primary-glow);
-    }
+    /* ── Sections ── */
+    .section { padding: 4.5rem 0; }
+    .section-alt { background: var(--bg-deep); }
 
-    .btn-outline {
-      border: 2px solid var(--border);
-      color: var(--text-muted);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* Sections */
-    .section {
-      padding: 3rem 0;
+    .section-label {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--primary); margin-bottom: 0.5rem;
     }
 
     .section h2 {
-      font-size: 2rem;
-      text-align: center;
+      font-size: 1.85rem; font-weight: 700; margin-bottom: 1rem;
+      color: var(--text); line-height: 1.25;
+    }
+
+    .section-intro {
+      font-size: 1.05rem; color: var(--text-muted); max-width: 640px;
       margin-bottom: 2.5rem;
-      color: var(--text);
     }
 
-    /* How it works */
-    .flow {
-      display: flex;
-      gap: 1rem;
-      align-items: stretch;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-    }
+    .centered { text-align: center; }
+    .centered .section-intro { margin-left: auto; margin-right: auto; }
 
-    .flow-arrow {
-      align-self: center;
-    }
-
-    .flow-step {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
+    /* ── Hero ── */
+    .hero {
       text-align: center;
-      width: 200px;
-      box-shadow: var(--shadow);
+      padding: 5rem 1.5rem 4rem;
+      background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(7,134,247,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero img { width: 100px; height: 100px; margin-bottom: 1.25rem; position: relative; }
+    .hero h1 {
+      font-size: 2.75rem; font-weight: 700; margin-bottom: 0.6rem;
+      color: var(--text); position: relative;
+    }
+    .hero .tagline {
+      font-size: 1.15rem; color: var(--text-muted);
+      max-width: 540px; margin: 0 auto 2rem; position: relative;
+    }
+    .hero .cta {
+      display: inline-flex; gap: 0.75rem; flex-wrap: wrap;
+      justify-content: center; position: relative;
     }
 
-    .flow-step .icon {
-      font-size: 1.75rem;
-      margin-bottom: 0.75rem;
-      color: var(--primary);
+    .btn {
+      display: inline-block; padding: 0.7rem 1.4rem; border-radius: var(--radius);
+      text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: all 0.2s;
     }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-hover); box-shadow: 0 0 20px var(--primary-glow); color: white; }
+    .btn-outline { border: 1.5px solid var(--border); color: var(--text-muted); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-    .flow-step h3 {
-      font-size: 1rem;
-      margin-bottom: 0.25rem;
-      color: var(--accent);
+    /* ── Flow diagram ── */
+    .flow-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; flex-wrap: wrap; margin-top: 2rem;
     }
-
-    .flow-step p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
+    .flow-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.5rem 1.25rem;
+      text-align: center; width: 220px; box-shadow: var(--shadow);
     }
+    .flow-card .icon { font-size: 1.5rem; margin-bottom: 0.6rem; color: var(--primary); }
+    .flow-card h4 { font-size: 0.95rem; color: var(--accent); margin-bottom: 0.25rem; }
+    .flow-card p { font-size: 0.82rem; color: var(--text-muted); }
+    .flow-arrow { font-size: 1.25rem; color: var(--text-light); }
 
-    .flow-arrow {
-      font-size: 1.5rem;
-      color: var(--text-light);
-    }
-
-    /* Features */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* ── Three-column cards ── */
+    .ways-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
     }
-
-    .feature {
-      padding: 1.5rem;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      background: var(--surface);
-      box-shadow: var(--shadow);
-      transition: border-color 0.2s;
+    .way-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 2rem 1.5rem;
+      box-shadow: var(--shadow); transition: border-color 0.2s;
+      display: flex; flex-direction: column;
     }
-
-    .feature:hover {
-      border-color: var(--primary);
+    .way-card:hover { border-color: var(--primary); }
+    .way-card .way-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; margin-bottom: 1rem;
     }
-
-    .feature h3 {
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-      color: var(--accent);
+    .way-card .way-icon.skill { background: rgba(7,134,247,0.12); color: var(--primary); }
+    .way-card .way-icon.vscode { background: rgba(163,139,250,0.12); color: var(--purple); }
+    .way-card .way-icon.webui { background: rgba(52,211,153,0.12); color: var(--green); }
+    .way-card h3 { font-size: 1.05rem; margin-bottom: 0.35rem; color: var(--text); }
+    .way-card p { font-size: 0.88rem; color: var(--text-muted); flex: 1; }
+    .way-card .way-link {
+      margin-top: 1rem; font-size: 0.85rem; color: var(--primary); font-weight: 500;
     }
+    .way-card .way-link:hover { color: var(--accent); }
 
-    .feature p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
+    /* ── Commands ── */
+    .commands-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+
+    .cmd-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.75rem; box-shadow: var(--shadow);
     }
-
-    /* Repos */
-    .repos {
-      background: var(--bg-deep);
+    .cmd-card h3 { font-size: 1.1rem; color: var(--accent); margin-bottom: 0.4rem; }
+    .cmd-card h3 code { font-size: 1rem; }
+    .cmd-card > p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .cmd-card ul { list-style: none; padding: 0; margin: 0 0 0.75rem; }
+    .cmd-card ul li {
+      font-size: 0.84rem; color: var(--text-muted);
+      padding: 0.25rem 0 0.25rem 1.1rem; position: relative;
     }
-
-    .repo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
+    .cmd-card ul li::before {
+      content: '\2022'; color: var(--primary); position: absolute; left: 0;
     }
-
-    .repo-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      text-decoration: none;
-      color: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      box-shadow: var(--shadow);
+    .cmd-card pre {
+      background: var(--bg-deep); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 0.7rem 1rem;
+      font-size: 0.8rem; line-height: 1.7; overflow-x: auto; margin: 0.5rem 0;
     }
-
-    .repo-card:hover {
-      border-color: var(--primary);
-      box-shadow: var(--shadow-md);
+    .cmd-card pre code { color: var(--text); }
+    .cmd-card h4 {
+      font-size: 0.9rem; color: var(--text); margin: 1rem 0 0.4rem;
+      padding-top: 0.75rem; border-top: 1px solid var(--border);
     }
-
-    .repo-card h3 {
-      font-size: 1rem;
-      margin-bottom: 0.35rem;
-      color: var(--text);
-    }
-
-    .repo-card p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    /* Quick start */
-    .quickstart {
-      background: var(--bg-deep);
-    }
-
-    .quickstart pre {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      overflow-x: auto;
-      font-size: 0.85rem;
-      line-height: 1.9;
-      max-width: 640px;
-      margin: 0 auto;
-      box-shadow: var(--shadow);
-    }
-
-    .quickstart code {
-      color: var(--text);
-    }
-
-    .quickstart .comment {
-      color: var(--text-light);
-    }
-
-    .quickstart .cmd {
-      color: var(--accent);
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 2.5rem;
-      color: var(--text-light);
-      font-size: 0.85rem;
-      border-top: 1px solid var(--border);
-    }
-
-    footer a {
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      color: var(--accent);
-    }
-
-    /* How it works — dual flow */
-    .dual-flow {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-
-    .dual-flow-column {
-      text-align: center;
-    }
-
-    .dual-flow-column h3 {
-      font-size: 1.15rem;
-      color: var(--accent);
-      margin-bottom: 0.25rem;
-    }
-
-    .dual-flow-column h3 code {
-      font-size: 1rem;
-    }
-
-    .dual-flow-column .flow-subtitle {
-      font-size: 0.85rem;
-      color: var(--text-light);
-      margin-bottom: 1.25rem;
-    }
-
-    .dual-flow-column .flow {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .dual-flow-column .flow-step {
-      width: 100%;
-      max-width: 260px;
-    }
-
-    .dual-flow-column .flow-arrow {
-      transform: none;
-    }
-
-    /* Commands */
-    .commands-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      align-items: start;
-    }
-
-    .command-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      box-shadow: var(--shadow);
-    }
-
-    .command-card h3 {
-      font-size: 1.15rem;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .command-card h3 code {
-      font-size: 1.05rem;
-    }
-
-    .command-card p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-
-    .command-card ul {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 1rem;
-    }
-
-    .command-card ul li {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      padding: 0.3rem 0;
-      padding-left: 1.25rem;
-      position: relative;
-    }
-
-    .command-card ul li::before {
-      content: '\2022';
-      color: var(--primary);
-      position: absolute;
-      left: 0;
-    }
-
-    .command-card h4 {
-      font-size: 0.95rem;
-      color: var(--text);
-      margin: 1.25rem 0 0.5rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .command-card pre {
-      background: var(--bg-deep);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 0.75rem 1rem;
-      font-size: 0.8rem;
-      line-height: 1.7;
-      overflow-x: auto;
-      margin: 0.5rem 0;
-    }
-
-    .command-card pre code {
-      color: var(--text);
-    }
-
-    .command-card .flag {
-      display: inline-block;
-      background: var(--bg-deep);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 0.1rem 0.4rem;
-      font-size: 0.8rem;
-      color: var(--accent);
+    .cmd-card .flag {
+      display: inline-block; background: var(--bg-deep);
+      border: 1px solid var(--border); border-radius: 4px;
+      padding: 0.1rem 0.4rem; font-size: 0.78rem; color: var(--accent);
     }
 
     .annotation-table {
-      width: 100%;
-      font-size: 0.8rem;
-      border-collapse: collapse;
-      margin: 0.5rem 0;
+      width: 100%; font-size: 0.78rem; border-collapse: collapse; margin: 0.5rem 0;
     }
-
     .annotation-table th {
-      text-align: left;
-      color: var(--text);
-      padding: 0.4rem 0.5rem;
-      border-bottom: 1px solid var(--border);
-      font-weight: 500;
+      text-align: left; color: var(--text); padding: 0.35rem 0.5rem;
+      border-bottom: 1px solid var(--border); font-weight: 500;
     }
-
     .annotation-table td {
-      color: var(--text-muted);
-      padding: 0.35rem 0.5rem;
+      color: var(--text-muted); padding: 0.3rem 0.5rem;
       border-bottom: 1px solid rgba(52, 68, 85, 0.4);
     }
+    .annotation-table code { font-size: 0.73rem; color: var(--accent); }
 
-    .annotation-table code {
-      font-size: 0.75rem;
-      color: var(--accent);
+    .comment { color: var(--text-light); }
+    .cmd { color: var(--accent); }
+
+    /* ── Feature list (VSCode, Web UI) ── */
+    .feature-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
     }
+    .feature-item {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      padding: 1rem; border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--surface); transition: border-color 0.2s;
+    }
+    .feature-item:hover { border-color: var(--primary); }
+    .feature-item .fi-icon {
+      width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; background: rgba(7,134,247,0.1); color: var(--primary);
+    }
+    .feature-item h4 { font-size: 0.9rem; color: var(--text); margin-bottom: 0.15rem; }
+    .feature-item p { font-size: 0.82rem; color: var(--text-muted); }
 
-    .command-ask {
-      text-align: center;
+    .section-cta {
       margin-top: 2rem;
-      padding: 1.25rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
     }
 
-    .command-ask h3 {
-      font-size: 1rem;
-      color: var(--accent);
-      margin-bottom: 0.25rem;
-    }
-
-    .command-ask p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    /* Gallery */
-    .gallery {
-      position: relative;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
+    /* ── Gallery ── */
+    .gallery { position: relative; max-width: 900px; margin: 0 auto; }
     .gallery-track {
-      display: flex;
-      overflow: hidden;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
+      display: flex; overflow: hidden;
+      border-radius: var(--radius-lg); border: 1px solid var(--border);
       box-shadow: var(--shadow-md);
     }
-
-    .gallery-slide {
-      min-width: 100%;
-      transition: transform 0.4s ease;
-    }
-
-    .gallery-slide img {
-      width: 100%;
-      display: block;
-      cursor: zoom-in;
-    }
-
+    .gallery-slide { min-width: 100%; transition: transform 0.4s ease; }
+    .gallery-slide img { width: 100%; display: block; cursor: zoom-in; }
     .gallery-caption {
-      padding: 0.75rem 1rem;
-      background: var(--surface);
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-align: center;
+      padding: 0.65rem 1rem; background: var(--surface);
+      font-size: 0.82rem; color: var(--text-muted); text-align: center;
     }
-
     .gallery-btn {
-      position: absolute;
-      top: calc(50% - 20px);
-      transform: translateY(-50%);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-      box-shadow: var(--shadow);
+      position: absolute; top: calc(50% - 20px); transform: translateY(-50%);
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text); font-size: 0.9rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; box-shadow: var(--shadow);
     }
-
     .gallery-btn:hover {
-      background: var(--surface-hover);
-      border-color: var(--primary);
-      color: var(--primary);
+      background: var(--surface-hover); border-color: var(--primary); color: var(--primary);
     }
-
-    .gallery-prev { left: -20px; }
-    .gallery-next { right: -20px; }
-
+    .gallery-prev { left: -18px; }
+    .gallery-next { right: -18px; }
     .gallery-dots {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
+      display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.75rem;
     }
-
     .gallery-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--border);
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      transition: background 0.2s;
+      width: 7px; height: 7px; border-radius: 50%; background: var(--border);
+      border: none; cursor: pointer; padding: 0; transition: background 0.2s;
+    }
+    .gallery-dot.active { background: var(--primary); }
+
+    /* ── Getting started cards ── */
+    .start-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .start-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.75rem; box-shadow: var(--shadow);
+    }
+    .start-card .start-badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 0.2rem 0.6rem; border-radius: 4px; margin-bottom: 0.75rem;
+    }
+    .start-card .start-badge.badge-blue { background: rgba(7,134,247,0.15); color: var(--primary); }
+    .start-card .start-badge.badge-purple { background: rgba(163,139,250,0.15); color: var(--purple); }
+    .start-card .start-badge.badge-green { background: rgba(52,211,153,0.15); color: var(--green); }
+    .start-card h3 { font-size: 1rem; margin-bottom: 0.5rem; color: var(--text); }
+    .start-card p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .start-card pre {
+      background: var(--bg-deep); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 0.75rem 1rem;
+      font-size: 0.78rem; line-height: 1.8; overflow-x: auto;
+    }
+    .start-card pre code { color: var(--text); }
+
+    /* ── Technical / .decodie structure ── */
+    .tech-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;
+    }
+    .tech-block h3 { font-size: 1rem; color: var(--accent); margin-bottom: 0.5rem; }
+    .tech-block p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .tech-block pre {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1rem;
+      font-size: 0.78rem; line-height: 1.6; overflow-x: auto;
+    }
+    .tech-block pre code { color: var(--text-muted); }
+    .tech-block ul { list-style: none; padding: 0; }
+    .tech-block ul li {
+      font-size: 0.85rem; color: var(--text-muted);
+      padding: 0.3rem 0 0.3rem 1.1rem; position: relative;
+    }
+    .tech-block ul li::before {
+      content: '\2022'; color: var(--primary); position: absolute; left: 0;
     }
 
-    .gallery-dot.active {
-      background: var(--primary);
+    /* ── Ecosystem ── */
+    .eco-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
     }
+    .eco-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.25rem;
+      text-decoration: none; color: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s; box-shadow: var(--shadow);
+      display: flex; align-items: flex-start; gap: 0.75rem;
+    }
+    .eco-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); color: inherit; }
+    .eco-card .eco-icon {
+      width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; background: var(--bg-deep); color: var(--text-muted);
+    }
+    .eco-card h3 { font-size: 0.95rem; color: var(--text); margin-bottom: 0.15rem; }
+    .eco-card p { font-size: 0.82rem; color: var(--text-muted); }
 
-    /* Lightbox */
+    /* ── Footer ── */
+    footer {
+      text-align: center; padding: 2.5rem;
+      color: var(--text-light); font-size: 0.82rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--primary); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    /* ── Lightbox ── */
     .lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: rgba(0, 0, 0, 0.85);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: zoom-out;
-      padding: 2rem;
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0, 0, 0, 0.88);
+      display: flex; align-items: center; justify-content: center;
+      cursor: zoom-out; padding: 2rem;
     }
-
     .lightbox img {
-      max-width: 100%;
-      max-height: 100%;
-      border-radius: var(--radius-lg);
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+      max-width: 100%; max-height: 100%;
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
     }
-
     .lightbox-caption {
-      position: absolute;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      background: var(--surface);
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius);
-      white-space: nowrap;
+      position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      font-size: 0.82rem; color: var(--text-muted);
+      background: var(--surface); padding: 0.5rem 1rem;
+      border-radius: var(--radius); white-space: nowrap;
     }
 
-    @media (max-width: 640px) {
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
       .hero h1 { font-size: 2rem; }
       .hero .tagline { font-size: 1rem; }
-      .hero { padding: 4rem 1.5rem 3rem; }
-      .flow { flex-direction: column; }
-      .flow-arrow { transform: rotate(90deg); }
-      .dual-flow { grid-template-columns: 1fr; gap: 3rem; }
+      .hero { padding: 3.5rem 1.5rem 3rem; }
+      .nav-links { display: none; }
+      .ways-grid { grid-template-columns: 1fr; }
       .commands-grid { grid-template-columns: 1fr; }
+      .start-grid { grid-template-columns: 1fr; }
+      .tech-grid { grid-template-columns: 1fr; }
+      .flow-row { flex-direction: column; }
+      .flow-arrow { transform: rotate(90deg); }
       .gallery-prev { left: 8px; }
       .gallery-next { right: 8px; }
     }
@@ -594,73 +405,275 @@
 </head>
 <body>
 
+<!-- ── Nav ── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <img src="assets/decodie-icon.png" alt="">
+      Decodie
+    </a>
+    <div class="nav-links">
+      <a href="#what">About</a>
+      <a href="#commands">Commands</a>
+      <a href="#vscode">VSCode</a>
+      <a href="#webui">Web UI</a>
+      <a href="#start">Get Started</a>
+      <a href="#technical">Technical</a>
+      <a href="https://github.com/owenbush/decodie-skill">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
 <section class="hero">
   <img src="assets/decodie-logo.png" alt="Decodie">
   <h1>Decodie</h1>
   <p class="tagline">Your AI learning companion. Turn every coding session into a structured learning trail.</p>
   <div class="cta">
-    <a href="#quickstart" class="btn btn-primary">Get Started</a>
+    <a href="#start" class="btn btn-primary">Get Started</a>
     <a href="https://github.com/owenbush/decodie-skill" class="btn btn-outline">View on GitHub</a>
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <h2>How it works</h2>
-    <div class="dual-flow">
-      <div class="dual-flow-column">
-        <h3><code>/decodie:observe</code></h3>
-        <p class="flow-subtitle">Real-time &mdash; documents as you code</p>
-        <div class="flow">
-          <div class="flow-step">
-            <div class="icon"><i class="fa-solid fa-play"></i></div>
-            <h3>Activate</h3>
-            <p>Run <code>/decodie:observe</code> to start a session</p>
-          </div>
-          <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-          <div class="flow-step">
-            <div class="icon"><i class="fa-solid fa-code"></i></div>
-            <h3>Code as usual</h3>
-            <p>Write code with Claude Code normally</p>
-          </div>
-          <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-          <div class="flow-step">
-            <div class="icon"><i class="fa-solid fa-pen-to-square"></i></div>
-            <h3>Entries appear</h3>
-            <p>Decisions are documented in real-time</p>
-          </div>
-        </div>
+<!-- ── What is Decodie ── -->
+<section class="section section-alt" id="what">
+  <div class="container centered">
+    <span class="section-label">What is Decodie?</span>
+    <h2>Learn from every line of code the AI writes</h2>
+    <p class="section-intro">Decodie generates structured learning entries as a byproduct of AI-assisted coding. Instead of just getting working code, you get documentation of <em>why</em> each decision was made, what patterns were used, and what alternatives were considered.</p>
+
+    <div class="flow-row">
+      <div class="flow-card">
+        <div class="icon"><i class="fa-solid fa-code"></i></div>
+        <h4>You code with AI</h4>
+        <p>Use Claude Code or VSCode as usual</p>
       </div>
-      <div class="dual-flow-column">
-        <h3><code>/decodie:analyze</code></h3>
-        <p class="flow-subtitle">Retroactive &mdash; analyzes existing code</p>
-        <div class="flow">
-          <div class="flow-step">
-            <div class="icon"><i class="fa-solid fa-crosshairs"></i></div>
-            <h3>Point at code</h3>
-            <p>Target a file, directory, or whole project</p>
-          </div>
-          <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-          <div class="flow-step">
-            <div class="icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-            <h3>Decodie reads</h3>
-            <p>Infers patterns, rationale, and decisions</p>
-          </div>
-          <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-          <div class="flow-step">
-            <div class="icon"><i class="fa-solid fa-layer-group"></i></div>
-            <h3>Batch generated</h3>
-            <p>Entries produced for the entire target</p>
-          </div>
-        </div>
+      <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      <div class="flow-card">
+        <div class="icon"><i class="fa-solid fa-pen-to-square"></i></div>
+        <h4>Decodie documents</h4>
+        <p>Patterns, decisions, and rationale are captured</p>
+      </div>
+      <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      <div class="flow-card">
+        <div class="icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <h4>You learn &amp; review</h4>
+        <p>Browse entries in VSCode, the web UI, or both</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<!-- ── Ways to Use ── -->
+<section class="section" id="ways">
+  <div class="container centered">
+    <span class="section-label">Ways to use Decodie</span>
+    <h2>Three tools, one learning trail</h2>
+    <p class="section-intro">Decodie works however you prefer. Generate entries with Claude Code or VSCode, then browse them wherever you like.</p>
+  </div>
   <div class="container">
-    <h2>See it in action</h2>
+    <div class="ways-grid">
+      <div class="way-card">
+        <div class="way-icon skill"><i class="fa-solid fa-terminal"></i></div>
+        <h3>Claude Code Skill</h3>
+        <p>Two commands &mdash; <code>/decodie:observe</code> for real-time documentation and <code>/decodie:analyze</code> for retroactive analysis of existing code. Works with any language or framework.</p>
+        <a href="#commands" class="way-link">Learn about commands &darr;</a>
+      </div>
+      <div class="way-card">
+        <div class="way-icon vscode"><i class="fa-solid fa-puzzle-piece"></i></div>
+        <h3>VSCode Extension</h3>
+        <p>Browse entries in a sidebar as you navigate code. Right-click to analyze files or selections. CodeLens shows entry titles inline. Built-in Q&A.</p>
+        <a href="#vscode" class="way-link">Learn about the extension &darr;</a>
+      </div>
+      <div class="way-card">
+        <div class="way-icon webui"><i class="fa-solid fa-globe"></i></div>
+        <h3>Web UI</h3>
+        <p>Full browsing experience with lessons, progress tracking, smart filtering, interactive Q&A, and syntax highlighting. Runs locally or via DDEV.</p>
+        <a href="#webui" class="way-link">Learn about the UI &darr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Claude Code Commands ── -->
+<section class="section section-alt" id="commands">
+  <div class="container">
+    <span class="section-label">Claude Code Skill</span>
+    <h2>Two commands for documenting code</h2>
+    <p class="section-intro">Install the skill once, then use these commands in any Claude Code session. Entries are written to a <code>.decodie/</code> directory in your project.</p>
+
+    <div class="commands-grid">
+      <div class="cmd-card">
+        <h3><code>/decodie:observe</code></h3>
+        <p>Activate at the start of a coding session. The agent documents decisions, patterns, and concepts as it writes code in real-time.</p>
+        <ul>
+          <li>Entries are written after each meaningful decision, interleaved with coding</li>
+          <li>Tracks session start/end with automatic session IDs</li>
+          <li>Detects duplicates and cross-references related entries</li>
+          <li>Marks entries as superseded when referenced code is rewritten or removed</li>
+          <li>Links to external documentation (MDN, php.net, React docs, etc.)</li>
+        </ul>
+        <pre><code><span class="cmd">/decodie:observe</span>
+<span class="comment"># then code as usual</span></code></pre>
+      </div>
+      <div class="cmd-card">
+        <h3><code>/decodie:analyze</code></h3>
+        <p>Generate learning entries from existing code &mdash; even code that wasn't written with Claude. Read-only: never modifies source files.</p>
+        <ul>
+          <li>Target a single file, a directory, or an entire project</li>
+          <li><strong>Selective mode</strong> (default): picks the 3&ndash;5 most significant patterns per file</li>
+          <li><strong>Exhaustive mode</strong> (<code class="flag">--exhaustive</code>): documents every meaningful pattern</li>
+          <li>Analysis sessions are prefixed <code>analyze-</code> for easy identification</li>
+          <li>Same duplicate detection and cross-referencing as observe</li>
+        </ul>
+        <pre><code><span class="cmd">/decodie:analyze src/auth/</span>
+<span class="cmd">/decodie:analyze src/utils/helpers.ts</span>
+<span class="cmd">/decodie:analyze --exhaustive src/</span></code></pre>
+
+        <h4>Source annotations</h4>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">Place annotation markers in source code comments to control what gets analyzed. These work in both selective and exhaustive modes.</p>
+        <table class="annotation-table">
+          <thead>
+            <tr><th>Marker</th><th>Scope</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>@decodie-include:file</code></td><td>Entire file</td></tr>
+            <tr><td><code>@decodie-include:class</code></td><td>Next class/interface/enum</td></tr>
+            <tr><td><code>@decodie-include:function</code></td><td>Next function/method</td></tr>
+            <tr><td><code>@decodie-include:start/end</code></td><td>Block region</td></tr>
+            <tr><td><code>@decodie-ignore:file</code></td><td>Entire file</td></tr>
+            <tr><td><code>@decodie-ignore:class</code></td><td>Next class/interface/enum</td></tr>
+            <tr><td><code>@decodie-ignore:function</code></td><td>Next function/method</td></tr>
+            <tr><td><code>@decodie-ignore:start/end</code></td><td>Block region</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:0.8rem;color:var(--text-muted);">
+          <code>@decodie-ignore</code> always takes precedence over <code>@decodie-include</code> when scopes overlap. <code>@decodie-include</code> entries don't count against the 3&ndash;5 limit in selective mode.
+        </p>
+        <pre><code><span class="comment">// @decodie-ignore:class</span>
+<span style="color:var(--text-light)">class GeneratedHandler { ... }</span>
+
+<span class="comment"># @decodie-include:function</span>
+<span style="color:var(--text-light)">def calculate_risk_score(portfolio):</span>
+    <span style="color:var(--text-light)">...</span></code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VSCode Extension ── -->
+<section class="section" id="vscode">
+  <div class="container">
+    <span class="section-label">VSCode Extension</span>
+    <h2>Browse and create entries without leaving the editor</h2>
+    <p class="section-intro">The Decodie extension brings your learning entries directly into VSCode (and Cursor). Analyze code with a right-click, browse entries as you navigate, and ask follow-up questions.</p>
+
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-bars-staggered"></i></div>
+        <div>
+          <h4>Sidebar entry browser</h4>
+          <p>Three tabs &mdash; File (entries for the active file), All (every entry in the project with filters), and Entry (full detail view).</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-computer-mouse"></i></div>
+        <div>
+          <h4>Right-click analysis</h4>
+          <p>Analyze a file or highlighted selection directly from the context menu. Entries are generated with Claude and appear in the sidebar.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-font"></i></div>
+        <div>
+          <h4>CodeLens</h4>
+          <p>Entry titles appear as clickable text above lines with associated entries. Click to view the full entry in the sidebar.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-comments"></i></div>
+        <div>
+          <h4>Q&A conversations</h4>
+          <p>Ask follow-up questions about any entry. Responses stream in with markdown rendering. Conversations persist across sessions.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-circle" style="font-size:0.5rem;"></i></div>
+        <div>
+          <h4>Gutter decorations</h4>
+          <p>Subtle blue dots mark lines with entries. Hover for a summary and a link to the full entry.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-filter"></i></div>
+        <div>
+          <h4>Filters</h4>
+          <p>Filter the All Entries tab by experience level, decision type, and topic to find what you need.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-cta centered">
+      <a href="https://marketplace.visualstudio.com/items?itemName=owenbush.decodie-vscode" class="btn btn-primary">
+        <i class="fa-solid fa-download" style="margin-right:0.4rem;"></i> Install from Marketplace
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Web UI ── -->
+<section class="section section-alt" id="webui">
+  <div class="container">
+    <span class="section-label">Web UI</span>
+    <h2>A full browsing experience for your learning entries</h2>
+    <p class="section-intro">The Decodie UI is a local web app that gives you lessons, progress tracking, filtering, and interactive Q&A &mdash; a complete learning dashboard.</p>
+
+    <div class="feature-grid" style="margin-bottom:2.5rem;">
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-book-open"></i></div>
+        <div>
+          <h4>Structured lessons</h4>
+          <p>Entries are automatically grouped into topic-based lessons. Create custom lessons with your own ordering and notes.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-chart-simple"></i></div>
+        <div>
+          <h4>Progress tracking</h4>
+          <p>Mark entries as learned and track your progress through each lesson with visual progress indicators.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-sliders"></i></div>
+        <div>
+          <h4>Smart filtering</h4>
+          <p>Filter by experience level, topic, decision type, session, and lifecycle. Switch between lesson and entry views.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-message"></i></div>
+        <div>
+          <h4>Interactive Q&A</h4>
+          <p>Highlight text in any entry and ask follow-up questions. Conversations are saved and persist across sessions.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-link"></i></div>
+        <div>
+          <h4>External doc links</h4>
+          <p>Automatic links to php.net, MDN, Python docs, Drupal API, React, Laravel, and more.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-code"></i></div>
+        <div>
+          <h4>Syntax highlighting</h4>
+          <p>Code snippets are displayed with proper highlighting alongside explanations and key concepts.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery -->
     <div class="gallery">
       <div class="gallery-track" id="galleryTrack">
         <div class="gallery-slide">
@@ -691,175 +704,163 @@
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <h2>Commands</h2>
-    <div class="commands-grid">
-      <div class="command-card">
-        <h3><code>/decodie:observe</code></h3>
-        <p>Activate at the start of a coding session. The agent documents decisions, patterns, and concepts as it writes code in real-time.</p>
-        <ul>
-          <li>Entries are written after each meaningful decision, interleaved with coding</li>
-          <li>Tracks session start/end with automatic session IDs</li>
-          <li>Detects duplicates and cross-references related entries</li>
-          <li>Marks entries as superseded when referenced code is rewritten or removed</li>
-          <li>Links to external documentation (MDN, php.net, React docs, etc.)</li>
-        </ul>
-        <pre><code><span class="cmd">/decodie:observe</span>
-<span class="comment"># then code as usual</span></code></pre>
-      </div>
-      <div class="command-card">
-        <h3><code>/decodie:analyze</code></h3>
-        <p>Generate learning entries from existing code &mdash; even code that wasn't written with Claude. Read-only: never modifies source files.</p>
-        <ul>
-          <li>Target a single file, a directory, or an entire project</li>
-          <li><strong>Selective mode</strong> (default): picks the 3&ndash;5 most significant patterns per file</li>
-          <li><strong>Exhaustive mode</strong> (<code class="flag">--exhaustive</code>): documents every meaningful pattern without per-file limits</li>
-          <li>Analysis sessions are prefixed <code>analyze-</code> so you can distinguish them</li>
-          <li>Same duplicate detection and cross-referencing as observe</li>
-        </ul>
-        <pre><code><span class="cmd">/decodie:analyze src/auth/</span>
-<span class="cmd">/decodie:analyze src/utils/helpers.ts</span>
-<span class="cmd">/decodie:analyze --exhaustive src/</span></code></pre>
-        <h4>Source annotations</h4>
-        <p>Place annotation markers in source code comments to control what gets analyzed. These work in both selective and exhaustive modes.</p>
-        <table class="annotation-table">
-          <thead>
-            <tr><th>Marker</th><th>Scope</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><code>@decodie-include:file</code></td><td>Entire file</td></tr>
-            <tr><td><code>@decodie-include:class</code></td><td>Next class/interface/enum</td></tr>
-            <tr><td><code>@decodie-include:function</code></td><td>Next function/method</td></tr>
-            <tr><td><code>@decodie-include:start/end</code></td><td>Block region</td></tr>
-            <tr><td><code>@decodie-ignore:file</code></td><td>Entire file</td></tr>
-            <tr><td><code>@decodie-ignore:class</code></td><td>Next class/interface/enum</td></tr>
-            <tr><td><code>@decodie-ignore:function</code></td><td>Next function/method</td></tr>
-            <tr><td><code>@decodie-ignore:start/end</code></td><td>Block region</td></tr>
-          </tbody>
-        </table>
-        <p><code>@decodie-ignore</code> always takes precedence over <code>@decodie-include</code> when scopes overlap. <code>@decodie-include</code> entries don't count against the 3&ndash;5 limit in selective mode.</p>
-        <pre><code><span class="comment">// @decodie-ignore:class</span>
-<span style="color:var(--text-light)">class GeneratedHandler { ... }</span>
-
-<span class="comment"># @decodie-include:function</span>
-<span style="color:var(--text-light)">def calculate_risk_score(portfolio):</span>
-    <span style="color:var(--text-light)">...</span></code></pre>
-      </div>
-    </div>
-    <div class="command-ask">
-      <h3><code>/decodie:ask</code></h3>
-      <p>Query existing learning entries by keyword or entry ID. Answers using entry content and live source code as context.</p>
-    </div>
+<!-- ── Getting Started ── -->
+<section class="section" id="start">
+  <div class="container centered">
+    <span class="section-label">Getting Started</span>
+    <h2>Choose your path</h2>
+    <p class="section-intro">Pick the setup that matches your workflow. All three produce the same <code>.decodie/</code> entries.</p>
   </div>
-</section>
-
-<section class="section">
   <div class="container">
-    <h2>Features</h2>
-    <div class="features">
-      <div class="feature">
-        <h3>Automatic documentation</h3>
-        <p>Learning entries are generated as the AI writes code with <code>/decodie:observe</code>, or retroactively from existing code with <code>/decodie:analyze</code>.</p>
-      </div>
-      <div class="feature">
-        <h3>Structured lessons</h3>
-        <p>Entries are automatically grouped into topic-based lessons with sequential navigation. Create custom lessons with your own ordering and notes.</p>
-      </div>
-      <div class="feature">
-        <h3>Progress tracking</h3>
-        <p>Mark entries as learned and track your progress through each lesson with visual progress indicators.</p>
-      </div>
-      <div class="feature">
-        <h3>Interactive Q&A</h3>
-        <p>Highlight any text in an entry and ask follow-up questions. Conversations persist across sessions.</p>
-      </div>
-      <div class="feature">
-        <h3>Content-based code references</h3>
-        <p>References use function signatures, not line numbers, so they survive refactoring.</p>
-      </div>
-      <div class="feature">
-        <h3>Smart filtering</h3>
-        <p>Filter by experience level, topic, decision type, and lifecycle stage. Switch between lesson and entry views.</p>
-      </div>
-      <div class="feature">
-        <h3>Source annotations</h3>
-        <p>Control what <code>/decodie:analyze</code> documents with <code>@decodie-include</code> and <code>@decodie-ignore</code> markers in source comments.</p>
-      </div>
-      <div class="feature">
-        <h3>External doc links</h3>
-        <p>Automatic links to php.net, MDN, Python docs, Drupal API, and framework docs.</p>
-      </div>
-      <div class="feature">
-        <h3>VSCode extension</h3>
-        <p>Browse entries in a sidebar as you navigate code. Right-click to analyze selections or files with Claude.</p>
-      </div>
-      <div class="feature">
-        <h3>DDEV integration</h3>
-        <p>Serve the UI as a DDEV service at decodie.yoursite.ddev.site.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section repos">
-  <div class="container">
-    <h2>Repositories</h2>
-    <div class="repo-grid">
-      <a href="https://github.com/owenbush/decodie-skill" class="repo-card">
-        <h3>decodie-skill</h3>
-        <p>Claude Code skills for generating and analyzing .decodie/ entries.</p>
-      </a>
-      <a href="https://github.com/owenbush/decodie-ui" class="repo-card">
-        <h3>decodie-ui</h3>
-        <p>Node.js presentation layer with lessons, progress tracking, browsing, filtering, and Q&A.</p>
-      </a>
-      <a href="https://github.com/owenbush/decodie-ddev" class="repo-card">
-        <h3>decodie-ddev</h3>
-        <p>DDEV add-on that serves the UI at decodie.SITENAME.ddev.site.</p>
-      </a>
-      <a href="https://marketplace.visualstudio.com/items?itemName=owenbush.decodie-vscode" class="repo-card">
-        <h3>decodie-vscode</h3>
-        <p>VSCode extension with sidebar entry browser, right-click analysis, and gutter decorations.</p>
-      </a>
-      <a href="https://github.com/owenbush/decodie-core" class="repo-card">
-        <h3>decodie-core</h3>
-        <p>Shared data layer — types, parser, and reference resolver used by the UI and VSCode extension.</p>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="section quickstart" id="quickstart">
-  <div class="container">
-    <h2>Quick Start</h2>
-    <pre><code><span class="comment"># 1. Install the commands + UI</span>
+    <div class="start-grid">
+      <div class="start-card">
+        <span class="start-badge badge-blue">Claude Code</span>
+        <h3>CLI + Web UI</h3>
+        <p>Install the skill, document as you code, then browse entries in the web UI.</p>
+        <pre><code><span class="comment"># Install commands</span>
 <span class="cmd">npx @owenbush/decodie-ui install-skill</span>
 
-<span class="comment"># 2. In Claude Code, start documenting</span>
+<span class="comment"># Start documenting</span>
 <span class="cmd">/decodie:observe</span>
 
-<span class="comment"># 3. Code as usual — entries appear in .decodie/</span>
-<span class="comment">#    Or analyze existing code:</span>
+<span class="comment"># Or analyze existing code</span>
 <span class="cmd">/decodie:analyze src/</span>
 
-<span class="comment"># 4. Browse your entries</span>
-<span class="cmd">npx @owenbush/decodie-ui serve</span>
+<span class="comment"># Browse entries</span>
+<span class="cmd">npx @owenbush/decodie-ui serve</span></code></pre>
+      </div>
+      <div class="start-card">
+        <span class="start-badge badge-purple">VSCode</span>
+        <h3>Extension</h3>
+        <p>Install the extension, add API credentials, then right-click to analyze any file.</p>
+        <pre><code><span class="comment"># Install from Marketplace</span>
+<span class="comment"># Search "Decodie" in Extensions</span>
 
-<span class="comment"># -- or browse entries in VSCode --</span>
-<span class="comment"># Install from <a href="https://marketplace.visualstudio.com/items?itemName=owenbush.decodie-vscode">marketplace.visualstudio.com</a></span>
+<span class="comment"># Add credentials</span>
+<span class="comment"># Create .decodie/.env:</span>
+<span class="cmd">CLAUDE_API_KEY=sk-ant-...</span>
 
-<span class="comment"># -- or with DDEV (installs everything automatically) --</span>
+<span class="comment"># Right-click any file</span>
+<span class="comment"># → Decodie: Analyze File</span></code></pre>
+      </div>
+      <div class="start-card">
+        <span class="start-badge badge-green">DDEV</span>
+        <h3>One command</h3>
+        <p>If you use DDEV, install everything &mdash; the skill, the UI, and HTTPS routing &mdash; in one step.</p>
+        <pre><code><span class="comment"># Install the add-on</span>
 <span class="cmd">ddev add-on get owenbush/decodie-ddev</span>
 <span class="cmd">ddev restart</span>
-<span class="cmd">ddev decodie</span></code></pre>
+
+<span class="comment"># Open the UI</span>
+<span class="cmd">ddev decodie</span>
+
+<span class="comment"># Start documenting</span>
+<span class="cmd">/decodie:observe</span></code></pre>
+      </div>
+    </div>
   </div>
 </section>
 
+<!-- ── Technical ── -->
+<section class="section section-alt" id="technical">
+  <div class="container">
+    <span class="section-label">How it works</span>
+    <h2>Under the hood</h2>
+    <p class="section-intro">Decodie stores everything in a self-contained <code>.decodie/</code> directory as plain JSON. The data format is tool-agnostic &mdash; any application that reads JSON can consume it.</p>
+
+    <div class="tech-grid">
+      <div class="tech-block">
+        <h3>Directory structure</h3>
+        <p>All data lives in <code>.decodie/</code> at the project root. Commit it to share with your team, or <code>.gitignore</code> it to keep it personal.</p>
+        <pre><code>.decodie/
+├── index.json          <span class="comment"># Entry metadata</span>
+├── config.json         <span class="comment"># User preferences</span>
+├── .env                <span class="comment"># API credentials</span>
+├── sessions/
+│   ├── 2026-04-01-001.json
+│   └── analyze-2026-04-01-001.json
+├── conversations/      <span class="comment"># Q&A history</span>
+├── lessons.json        <span class="comment"># Custom lessons</span>
+└── progress.json       <span class="comment"># Learning progress</span></code></pre>
+      </div>
+      <div class="tech-block">
+        <h3>Content-based anchoring</h3>
+        <p>References use function signatures and class declarations as anchors &mdash; not line numbers. This means entries survive refactoring, code moves, and formatting changes.</p>
+        <ul>
+          <li>Exact match, fuzzy match (whitespace differences), and drifted match (file moved)</li>
+          <li>SHA-256 hash of anchor text for quick verification</li>
+          <li>Confidence scoring for each resolution</li>
+        </ul>
+
+        <h3 style="margin-top:1.5rem;">Entry structure</h3>
+        <p>Each entry captures what a developer needs to understand the code:</p>
+        <ul>
+          <li><strong>Title</strong> &mdash; concise description of the pattern or decision</li>
+          <li><strong>Code snippet</strong> &mdash; the relevant excerpt</li>
+          <li><strong>Explanation</strong> &mdash; why this approach, not just what it does</li>
+          <li><strong>Alternatives</strong> &mdash; what else was considered and trade-offs</li>
+          <li><strong>Key concepts</strong> &mdash; core takeaways</li>
+          <li><strong>Experience level</strong> &mdash; foundational, intermediate, advanced, or ecosystem</li>
+          <li><strong>Topics</strong> &mdash; kebab-case tags for filtering</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Ecosystem ── -->
+<section class="section" id="ecosystem">
+  <div class="container centered">
+    <span class="section-label">Ecosystem</span>
+    <h2>All the pieces</h2>
+  </div>
+  <div class="container">
+    <div class="eco-grid">
+      <a href="https://github.com/owenbush/decodie-skill" class="eco-card">
+        <div class="eco-icon"><i class="fa-brands fa-github"></i></div>
+        <div>
+          <h3>decodie-skill</h3>
+          <p>Claude Code skill for generating and analyzing entries.</p>
+        </div>
+      </a>
+      <a href="https://github.com/owenbush/decodie-ui" class="eco-card">
+        <div class="eco-icon"><i class="fa-solid fa-globe"></i></div>
+        <div>
+          <h3>decodie-ui</h3>
+          <p>Web UI with lessons, progress tracking, and Q&A. Available on <strong>npm</strong>.</p>
+        </div>
+      </a>
+      <a href="https://marketplace.visualstudio.com/items?itemName=owenbush.decodie-vscode" class="eco-card">
+        <div class="eco-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
+        <div>
+          <h3>decodie-vscode</h3>
+          <p>VSCode extension. Available on the <strong>Marketplace</strong>.</p>
+        </div>
+      </a>
+      <a href="https://github.com/owenbush/decodie-ddev" class="eco-card">
+        <div class="eco-icon"><i class="fa-solid fa-server"></i></div>
+        <div>
+          <h3>decodie-ddev</h3>
+          <p>DDEV add-on for one-command local setup.</p>
+        </div>
+      </a>
+      <a href="https://github.com/owenbush/decodie-core" class="eco-card">
+        <div class="eco-icon"><i class="fa-solid fa-cube"></i></div>
+        <div>
+          <h3>decodie-core</h3>
+          <p>Shared data layer &mdash; types, parser, reference resolver. On <strong>npm</strong>.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
 <footer>
   <p>Made by <a href="https://github.com/owenbush">Owen Bush</a></p>
 </footer>
 
+<!-- ── Gallery JS ── -->
 <script>
 (function () {
   var track = document.getElementById('galleryTrack');
@@ -870,7 +871,6 @@
   var current = 0;
   var count = slides.length;
 
-  // Create dots
   for (var i = 0; i < count; i++) {
     var dot = document.createElement('button');
     dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
