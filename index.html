@@ -476,7 +476,7 @@
       <div class="way-card">
         <div class="way-icon skill"><i class="fa-solid fa-terminal"></i></div>
         <h3>Claude Code Skill</h3>
-        <p>Two commands &mdash; <code>/decodie:observe</code> for real-time documentation and <code>/decodie:analyze</code> for retroactive analysis of existing code. Works with any language or framework.</p>
+        <p>Three commands &mdash; <code>/decodie:observe</code> for real-time documentation, <code>/decodie:analyze</code> for retroactive analysis, and <code>/decodie:explain</code> to understand specific code with issues and improvement suggestions.</p>
         <a href="#commands" class="way-link">Learn about commands &darr;</a>
       </div>
       <div class="way-card">
@@ -499,8 +499,8 @@
 <section class="section section-alt" id="commands">
   <div class="container">
     <span class="section-label">Claude Code Skill</span>
-    <h2>Two commands for documenting code</h2>
-    <p class="section-intro">Install the skill once, then use these commands in any Claude Code session. Entries are written to a <code>.decodie/</code> directory in your project.</p>
+    <h2>Three commands for understanding code</h2>
+    <p class="section-intro">Install the skill once, then use these commands in any Claude Code session. Observe and analyze write to <code>.decodie/</code> automatically; explain is ephemeral by default and saved on demand.</p>
 
     <div class="commands-grid">
       <div class="cmd-card">
@@ -557,6 +557,23 @@
 <span style="color:var(--text-light)">def calculate_risk_score(portfolio):</span>
     <span style="color:var(--text-light)">...</span></code></pre>
       </div>
+      <div class="cmd-card">
+        <h3><code>/decodie:explain</code></h3>
+        <p>Get an immediate, detailed explanation of a specific piece of code &mdash; what it does, how it works, potential issues, and improvement suggestions. Perfect for reading unfamiliar code or learning from AI-generated code.</p>
+        <ul>
+          <li><strong>Summary</strong> &mdash; a high-level overview of what the code does</li>
+          <li><strong>Detailed breakdowns</strong> &mdash; complex sections explained individually with code excerpts</li>
+          <li><strong>Issues</strong> &mdash; potential bugs, security concerns, and edge cases flagged with severity</li>
+          <li><strong>Improvements</strong> &mdash; refactoring suggestions and modern alternatives with rationale</li>
+          <li><strong>Ephemeral by default</strong> &mdash; nothing is saved unless you explicitly ask</li>
+          <li>Saved explanations use the <code>explain-</code> session prefix</li>
+        </ul>
+        <pre><code><span class="comment"># Paste or reference code, then:</span>
+<span class="cmd">/decodie:explain</span>
+
+<span class="comment"># Ask to save a valuable explanation</span>
+<span class="comment">"save this as an entry"</span></code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -566,7 +583,7 @@
   <div class="container">
     <span class="section-label">VSCode Extension</span>
     <h2>Browse and create entries without leaving the editor</h2>
-    <p class="section-intro">The Decodie extension brings your learning entries directly into VSCode (and Cursor). Analyze code with a right-click, browse entries as you navigate, and ask follow-up questions.</p>
+    <p class="section-intro">The Decodie extension brings your learning entries directly into VSCode (and Cursor). Analyze or explain code with a right-click, browse entries as you navigate, and ask follow-up questions.</p>
 
     <div class="feature-grid">
       <div class="feature-item">
@@ -581,6 +598,13 @@
         <div>
           <h4>Right-click analysis</h4>
           <p>Analyze a file or highlighted selection directly from the context menu. Entries are generated with Claude and appear in the sidebar.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-lightbulb"></i></div>
+        <div>
+          <h4>Explain selection</h4>
+          <p>Highlight code and right-click &rarr; Explain. Get a summary, detailed breakdowns, issues with severity badges, and improvement suggestions. Save as an entry if valuable.</p>
         </div>
       </div>
       <div class="feature-item">
