@@ -186,6 +186,7 @@
 
     /* ── Commands ── */
     .commands-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+    .commands-column { display: flex; flex-direction: column; gap: 2rem; }
 
     .cmd-card {
       background: var(--surface); border: 1px solid var(--border);
@@ -503,21 +504,41 @@
     <p class="section-intro">Install the skill once, then use these commands in any Claude Code session. Observe and analyze write to <code>.decodie/</code> automatically; explain is ephemeral by default and saved on demand.</p>
 
     <div class="commands-grid">
-      <div class="cmd-card">
-        <h3><code>/decodie:observe</code></h3>
-        <p>Activate at the start of a coding session. The agent documents decisions, patterns, and concepts as it writes code in real-time.</p>
-        <ul>
-          <li>Entries are written after each meaningful decision, interleaved with coding</li>
-          <li>Tracks session start/end with automatic session IDs</li>
-          <li>Detects duplicates and cross-references related entries</li>
-          <li>Marks entries as superseded when referenced code is rewritten or removed</li>
-          <li>Links to external documentation (MDN, php.net, React docs, etc.)</li>
-        </ul>
-        <pre><code><span class="cmd">/decodie:observe</span>
+      <div class="commands-column">
+        <div class="cmd-card">
+          <h3><code>/decodie:observe</code></h3>
+          <p>Activate at the start of a coding session. The agent documents decisions, patterns, and concepts as it writes code in real-time.</p>
+          <ul>
+            <li>Entries are written after each meaningful decision, interleaved with coding</li>
+            <li>Tracks session start/end with automatic session IDs</li>
+            <li>Detects duplicates and cross-references related entries</li>
+            <li>Marks entries as superseded when referenced code is rewritten or removed</li>
+            <li>Links to external documentation (MDN, php.net, React docs, etc.)</li>
+          </ul>
+          <pre><code><span class="cmd">/decodie:observe</span>
 <span class="comment"># then code as usual</span></code></pre>
+        </div>
+        <div class="cmd-card">
+          <h3><code>/decodie:explain</code></h3>
+          <p>Get an immediate, detailed explanation of a specific piece of code &mdash; what it does, how it works, potential issues, and improvement suggestions. Perfect for reading unfamiliar code or learning from AI-generated code.</p>
+          <ul>
+            <li><strong>Summary</strong> &mdash; a high-level overview of what the code does</li>
+            <li><strong>Detailed breakdowns</strong> &mdash; complex sections explained individually with code excerpts</li>
+            <li><strong>Issues</strong> &mdash; potential bugs, security concerns, and edge cases flagged with severity</li>
+            <li><strong>Improvements</strong> &mdash; refactoring suggestions and modern alternatives with rationale</li>
+            <li><strong>Ephemeral by default</strong> &mdash; nothing is saved unless you explicitly ask</li>
+            <li>Saved explanations use the <code>explain-</code> session prefix</li>
+          </ul>
+          <pre><code><span class="comment"># Paste or reference code, then:</span>
+<span class="cmd">/decodie:explain</span>
+
+<span class="comment"># Ask to save a valuable explanation</span>
+<span class="comment">"save this as an entry"</span></code></pre>
+        </div>
       </div>
-      <div class="cmd-card">
-        <h3><code>/decodie:analyze</code></h3>
+      <div class="commands-column">
+        <div class="cmd-card">
+          <h3><code>/decodie:analyze</code></h3>
         <p>Generate learning entries from existing code &mdash; even code that wasn't written with Claude. Read-only: never modifies source files.</p>
         <ul>
           <li>Target a single file, a directory, or an entire project</li>
@@ -550,29 +571,13 @@
         <p style="font-size:0.8rem;color:var(--text-muted);">
           <code>@decodie-ignore</code> always takes precedence over <code>@decodie-include</code> when scopes overlap. <code>@decodie-include</code> entries don't count against the 3&ndash;5 limit in selective mode.
         </p>
-        <pre><code><span class="comment">// @decodie-ignore:class</span>
+          <pre><code><span class="comment">// @decodie-ignore:class</span>
 <span style="color:var(--text-light)">class GeneratedHandler { ... }</span>
 
 <span class="comment"># @decodie-include:function</span>
 <span style="color:var(--text-light)">def calculate_risk_score(portfolio):</span>
     <span style="color:var(--text-light)">...</span></code></pre>
-      </div>
-      <div class="cmd-card">
-        <h3><code>/decodie:explain</code></h3>
-        <p>Get an immediate, detailed explanation of a specific piece of code &mdash; what it does, how it works, potential issues, and improvement suggestions. Perfect for reading unfamiliar code or learning from AI-generated code.</p>
-        <ul>
-          <li><strong>Summary</strong> &mdash; a high-level overview of what the code does</li>
-          <li><strong>Detailed breakdowns</strong> &mdash; complex sections explained individually with code excerpts</li>
-          <li><strong>Issues</strong> &mdash; potential bugs, security concerns, and edge cases flagged with severity</li>
-          <li><strong>Improvements</strong> &mdash; refactoring suggestions and modern alternatives with rationale</li>
-          <li><strong>Ephemeral by default</strong> &mdash; nothing is saved unless you explicitly ask</li>
-          <li>Saved explanations use the <code>explain-</code> session prefix</li>
-        </ul>
-        <pre><code><span class="comment"># Paste or reference code, then:</span>
-<span class="cmd">/decodie:explain</span>
-
-<span class="comment"># Ask to save a valuable explanation</span>
-<span class="comment">"save this as an entry"</span></code></pre>
+        </div>
       </div>
     </div>
   </div>
