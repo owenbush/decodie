@@ -159,7 +159,7 @@
 
     /* ── Three-column cards ── */
     .ways-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
+      display: grid; grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
     }
     .way-card {
@@ -177,6 +177,7 @@
     .way-card .way-icon.skill { background: rgba(7,134,247,0.12); color: var(--primary); }
     .way-card .way-icon.vscode { background: rgba(163,139,250,0.12); color: var(--purple); }
     .way-card .way-icon.webui { background: rgba(52,211,153,0.12); color: var(--green); }
+    .way-card .way-icon.action { background: rgba(251,191,36,0.12); color: var(--amber); }
     .way-card h3 { font-size: 1.05rem; margin-bottom: 0.35rem; color: var(--text); }
     .way-card p { font-size: 0.88rem; color: var(--text-muted); flex: 1; }
     .way-card .way-link {
@@ -295,7 +296,7 @@
 
     /* ── Getting started cards ── */
     .start-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
     }
     .start-card {
       background: var(--surface); border: 1px solid var(--border);
@@ -418,6 +419,7 @@
       <a href="#commands">Commands</a>
       <a href="#vscode">VSCode</a>
       <a href="#webui">Web UI</a>
+      <a href="#github-action">CI</a>
       <a href="#start">Get Started</a>
       <a href="#technical">Technical</a>
       <a href="#ecosystem">GitHub</a>
@@ -469,8 +471,8 @@
 <section class="section" id="ways">
   <div class="container centered">
     <span class="section-label">Ways to use Decodie</span>
-    <h2>Three tools, one learning trail</h2>
-    <p class="section-intro">Decodie works however you prefer. Generate entries with Claude Code or VSCode, then browse them wherever you like.</p>
+    <h2>Four tools, one learning trail</h2>
+    <p class="section-intro">Decodie works however you prefer. Generate entries manually, from your editor, or automatically in CI &mdash; then browse them wherever you like.</p>
   </div>
   <div class="container">
     <div class="ways-grid">
@@ -491,6 +493,12 @@
         <h3>Web UI</h3>
         <p>Full browsing experience with lessons, progress tracking, smart filtering, interactive Q&A, and syntax highlighting. Runs locally or via DDEV.</p>
         <a href="#webui" class="way-link">Learn about the UI &darr;</a>
+      </div>
+      <div class="way-card">
+        <div class="way-icon action"><i class="fa-brands fa-github"></i></div>
+        <h3>GitHub Action</h3>
+        <p>Automatically analyze changed files in every PR. Uses the Decodie skill under the hood &mdash; same quality, zero manual effort. Posts a summary comment and commits entries.</p>
+        <a href="#github-action" class="way-link">Learn about the action &darr;</a>
       </div>
     </div>
   </div>
@@ -733,12 +741,83 @@
   </div>
 </section>
 
+<!-- ── GitHub Action ── -->
+<section class="section" id="github-action">
+  <div class="container">
+    <span class="section-label">GitHub Action</span>
+    <h2>Automatic analysis on every pull request</h2>
+    <p class="section-intro">Add one workflow file and every PR gets analyzed automatically. Uses the same Decodie skill as Claude Code &mdash; same prompts, same schema, same quality.</p>
+
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-robot"></i></div>
+        <div>
+          <h4>Zero manual effort</h4>
+          <p>Runs automatically when a PR is opened or updated. No need to remember to analyze &mdash; it just happens.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-comment"></i></div>
+        <div>
+          <h4>PR comment summary</h4>
+          <p>Posts a formatted comment with entries grouped by file. Collapsible sections keep it clean. Updates on each push.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-code-commit"></i></div>
+        <div>
+          <h4>Commits to .decodie/</h4>
+          <p>Entries are committed to the PR branch, ready for the VSCode extension and web UI to pick up.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-sliders"></i></div>
+        <div>
+          <h4>Configurable</h4>
+          <p>Control max files, include/exclude patterns, selective vs exhaustive mode, and model selection.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cmd-card" style="margin-top:2rem;">
+      <h3>Workflow setup</h3>
+      <p>Add this file to your repo at <code>.github/workflows/decodie.yml</code>:</p>
+      <pre><code><span class="cmd">name: Decodie</span>
+<span class="cmd">on:</span>
+  <span class="cmd">pull_request:</span>
+    <span class="cmd">types: [opened, synchronize]</span>
+
+<span class="cmd">jobs:</span>
+  <span class="cmd">analyze:</span>
+    <span class="cmd">runs-on: ubuntu-latest</span>
+    <span class="cmd">permissions:</span>
+      <span class="cmd">contents: write</span>
+      <span class="cmd">pull-requests: write</span>
+    <span class="cmd">steps:</span>
+      <span class="comment">- uses: actions/checkout@v4</span>
+        <span class="cmd">with:</span>
+          <span class="cmd">ref: ${{ github.head_ref }}</span>
+      <span class="comment">- uses: owenbush/decodie-github-action@v1</span>
+        <span class="cmd">with:</span>
+          <span class="comment"># Use one of:</span>
+          <span class="cmd">anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}</span>
+          <span class="comment"># claude-code-oauth-token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}</span></code></pre>
+    </div>
+
+    <div class="section-cta centered" style="margin-top:1.5rem;">
+      <a href="https://github.com/marketplace/actions/decodie-analyze" class="btn btn-primary">
+        <i class="fa-brands fa-github" style="margin-right:0.4rem;"></i> View on GitHub Marketplace
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ── Getting Started ── -->
-<section class="section" id="start">
+<section class="section section-alt" id="start">
   <div class="container centered">
     <span class="section-label">Getting Started</span>
     <h2>Choose your path</h2>
-    <p class="section-intro">Pick the setup that matches your workflow. All three produce the same <code>.decodie/</code> entries.</p>
+    <p class="section-intro">Pick the setup that matches your workflow. All four produce the same <code>.decodie/</code> entries.</p>
   </div>
   <div class="container">
     <div class="start-grid">
@@ -785,6 +864,16 @@
 
 <span class="comment"># Start documenting</span>
 <span class="cmd">/decodie:observe</span></code></pre>
+      </div>
+      <div class="start-card">
+        <span class="start-badge" style="background:rgba(251,191,36,0.15);color:var(--amber);">GitHub Action</span>
+        <h3>Automatic on every PR</h3>
+        <p>Add a workflow file and entries are generated automatically on every pull request.</p>
+        <pre><code><span class="comment"># .github/workflows/decodie.yml</span>
+<span class="cmd">- uses: owenbush/decodie-github-action@v1</span>
+  <span class="cmd">with:</span>
+    <span class="cmd">anthropic-api-key:</span>
+      <span class="cmd">${{ secrets.ANTHROPIC_API_KEY }}</span></code></pre>
       </div>
     </div>
   </div>
@@ -864,6 +953,13 @@
         <div>
           <h3>decodie-vscode</h3>
           <p>VSCode extension. Available on the <strong>Marketplace</strong>.</p>
+        </div>
+      </a>
+      <a href="https://github.com/marketplace/actions/decodie-analyze" class="eco-card">
+        <div class="eco-icon"><i class="fa-brands fa-github"></i></div>
+        <div>
+          <h3>decodie-github-action</h3>
+          <p>GitHub Action for automatic PR analysis. On the <strong>Marketplace</strong>.</p>
         </div>
       </a>
       <a href="https://github.com/owenbush/decodie-ddev" class="eco-card">
