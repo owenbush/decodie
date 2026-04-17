@@ -15,6 +15,7 @@ Your AI learning companion. This repo hosts the [Decodie website](https://decodi
 | [decodie-github-action](https://github.com/owenbush/decodie-github-action) | GitHub Action for automatic PR analysis ([Marketplace](https://github.com/marketplace/actions/decodie-analyze)) |
 | [decodie-github-bot](https://github.com/owenbush/decodie-github-bot) | Interactive bot for on-demand analysis and explanations in PR comments |
 | [decodie-core](https://github.com/owenbush/decodie-core) | Shared data layer (types, parser, reference resolver) |
+| [decodie-ui-shared](https://github.com/owenbush/decodie-ui-shared) | Shared styles, utilities, and CSS constants for UI consumers |
 
 ## Development
 
