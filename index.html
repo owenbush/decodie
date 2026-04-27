@@ -593,6 +593,11 @@
 <span style="color:var(--text-light)">def calculate_risk_score(portfolio):</span>
     <span style="color:var(--text-light)">...</span></code></pre>
         </div>
+      </div>
+    </div>
+
+    <div class="commands-grid" style="margin-top:2rem;">
+      <div class="commands-column">
         <div class="cmd-card">
           <h3><code>/decodie:verify</code></h3>
           <p>Walk every entry's references, confirm the anchored code still resolves, and stamp confirmed entries with the current commit SHA. The deep check &mdash; reads each referenced file. Run it after large refactors or before publishing entries.</p>
@@ -606,6 +611,8 @@
           <pre><code><span class="cmd">/decodie:verify</span>
 <span class="cmd">/decodie:verify src/auth/</span></code></pre>
         </div>
+      </div>
+      <div class="commands-column">
         <div class="cmd-card">
           <h3><code>/decodie:flag-stale</code></h3>
           <p>The cheap counterpart to <code>verify</code>, designed for CI on every PR. Diffs source files against each entry's <code>verified_sha</code> and flips <code>stale: true</code> on entries whose files have changed. No source files are read.</p>
