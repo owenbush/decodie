@@ -550,20 +550,6 @@
 <span class="comment"># Ask to save a valuable explanation</span>
 <span class="comment">"save this as an entry"</span></code></pre>
         </div>
-        <div class="cmd-card">
-          <h3><code>/decodie:overview</code></h3>
-          <p>Generate a high-level overview of a file, directory, or project &mdash; purpose, structure, entry points, and dependencies. The onboarding command: run this first when opening unfamiliar code, before drilling in with <code>analyze</code> or <code>explain</code>.</p>
-          <ul>
-            <li>Target a single file, a directory, or the whole project</li>
-            <li><strong>Persists by default</strong> &mdash; overviews are saved as entries so they can be browsed and shared</li>
-            <li>Re-running on the same target overwrites the existing overview in place &mdash; no superseded chains</li>
-            <li>Overview sessions are prefixed <code>overview-</code> for easy identification</li>
-            <li>Captures <code>purpose</code>, <code>structure</code>, optional <code>entry_points</code>, and optional <code>dependencies</code></li>
-          </ul>
-          <pre><code><span class="cmd">/decodie:overview src/auth/</span>
-<span class="cmd">/decodie:overview src/utils/helpers.ts</span>
-<span class="cmd">/decodie:overview</span>  <span class="comment"># whole project</span></code></pre>
-        </div>
       </div>
       <div class="commands-column">
         <div class="cmd-card">
@@ -638,6 +624,25 @@
             <li>Used under the hood by the GitHub Action</li>
           </ul>
           <pre><code><span class="cmd">/decodie:flag-stale</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="commands-grid" style="margin-top:2rem; grid-template-columns: 1fr;">
+      <div class="commands-column">
+        <div class="cmd-card">
+          <h3><code>/decodie:overview</code></h3>
+          <p>Generate a high-level overview of a file, directory, or project &mdash; purpose, structure, entry points, and dependencies. The onboarding command: run this first when opening unfamiliar code, before drilling in with <code>analyze</code> or <code>explain</code>.</p>
+          <ul>
+            <li>Target a single file, a directory, or the whole project</li>
+            <li><strong>Persists by default</strong> &mdash; overviews are saved as entries so they can be browsed and shared</li>
+            <li>Re-running on the same target overwrites the existing overview in place &mdash; no superseded chains</li>
+            <li>Overview sessions are prefixed <code>overview-</code> for easy identification</li>
+            <li>Captures <code>purpose</code>, <code>structure</code>, optional <code>entry_points</code>, and optional <code>dependencies</code></li>
+          </ul>
+          <pre><code><span class="cmd">/decodie:overview src/auth/</span>
+<span class="cmd">/decodie:overview src/utils/helpers.ts</span>
+<span class="cmd">/decodie:overview</span>  <span class="comment"># whole project</span></code></pre>
         </div>
       </div>
     </div>
