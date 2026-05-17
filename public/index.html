@@ -416,13 +416,8 @@
     </a>
     <div class="nav-links">
       <a href="#what">About</a>
-      <a href="#commands">Commands</a>
       <a href="#vscode">VSCode</a>
       <a href="#webui">Web UI</a>
-      <a href="#github-action">CI</a>
-      <a href="#github-bot">Bot</a>
-      <a href="#start">Get Started</a>
-      <a href="#technical">Technical</a>
       <a href="#ecosystem">GitHub</a>
       <a href="/docs/">Docs</a>
     </div>
@@ -514,138 +509,58 @@
 
 <!-- ── Claude Code Commands ── -->
 <section class="section section-alt" id="commands">
-  <div class="container">
+  <div class="container centered">
     <span class="section-label">Claude Code Skill</span>
-    <h2>Six commands for understanding &mdash; and trusting &mdash; your code</h2>
-    <p class="section-intro">Install the skill once, then use these commands in any Claude Code session. Observe, analyze, and overview write to <code>.decodie/</code> automatically; explain is ephemeral by default and saved on demand. Verify and flag-stale keep entries honest as the code beneath them changes.</p>
+    <h2>Six commands for understanding your code</h2>
+    <p class="section-intro">Install the skill once, then use these commands in any Claude Code session.</p>
 
-    <div class="commands-grid">
-      <div class="commands-column">
-        <div class="cmd-card">
-          <h3><code>/decodie:observe</code></h3>
-          <p>Activate at the start of a coding session. The agent documents decisions, patterns, and concepts as it writes code in real-time.</p>
-          <ul>
-            <li>Entries are written after each meaningful decision, interleaved with coding</li>
-            <li>Tracks session start/end with automatic session IDs</li>
-            <li>Detects duplicates and cross-references related entries</li>
-            <li>Marks entries as superseded when referenced code is rewritten or removed</li>
-            <li>Links to external documentation (MDN, php.net, React docs, etc.)</li>
-          </ul>
-          <pre><code><span class="cmd">/decodie:observe</span>
-<span class="comment"># then code as usual</span></code></pre>
-        </div>
-        <div class="cmd-card">
-          <h3><code>/decodie:explain</code></h3>
-          <p>Get an immediate, detailed explanation of a specific piece of code &mdash; what it does, how it works, potential issues, and improvement suggestions. Perfect for reading unfamiliar code or learning from AI-generated code.</p>
-          <ul>
-            <li><strong>Summary</strong> &mdash; a high-level overview of what the code does</li>
-            <li><strong>Detailed breakdowns</strong> &mdash; complex sections explained individually with code excerpts</li>
-            <li><strong>Issues</strong> &mdash; potential bugs, security concerns, and edge cases flagged with severity</li>
-            <li><strong>Improvements</strong> &mdash; refactoring suggestions and modern alternatives with rationale</li>
-            <li><strong>Ephemeral by default</strong> &mdash; nothing is saved unless you explicitly ask</li>
-            <li>Saved explanations use the <code>explain-</code> session prefix</li>
-          </ul>
-          <pre><code><span class="comment"># Paste or reference code, then:</span>
-<span class="cmd">/decodie:explain</span>
-
-<span class="comment"># Ask to save a valuable explanation</span>
-<span class="comment">"save this as an entry"</span></code></pre>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-eye"></i></div>
+        <div>
+          <h4><code>/decodie:observe</code></h4>
+          <p>Document decisions and patterns in real-time as you code.</p>
         </div>
       </div>
-      <div class="commands-column">
-        <div class="cmd-card">
-          <h3><code>/decodie:analyze</code></h3>
-        <p>Generate learning entries from existing code &mdash; even code that wasn't written with Claude. Read-only: never modifies source files.</p>
-        <ul>
-          <li>Target a single file, a directory, or an entire project</li>
-          <li><strong>Selective mode</strong> (default): picks the 3&ndash;5 most significant patterns per file</li>
-          <li><strong>Exhaustive mode</strong> (<code class="flag">--exhaustive</code>): documents every meaningful pattern</li>
-          <li>Analysis sessions are prefixed <code>analyze-</code> for easy identification</li>
-          <li>Same duplicate detection and cross-referencing as observe</li>
-        </ul>
-        <pre><code><span class="cmd">/decodie:analyze src/auth/</span>
-<span class="cmd">/decodie:analyze src/utils/helpers.ts</span>
-<span class="cmd">/decodie:analyze --exhaustive src/</span></code></pre>
-
-        <h4>Source annotations</h4>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">Place annotation markers in source code comments to control what gets analyzed. These work in both selective and exhaustive modes.</p>
-        <table class="annotation-table">
-          <thead>
-            <tr><th>Marker</th><th>Scope</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><code>@decodie-include:file</code></td><td>Entire file</td></tr>
-            <tr><td><code>@decodie-include:class</code></td><td>Next class/interface/enum</td></tr>
-            <tr><td><code>@decodie-include:function</code></td><td>Next function/method</td></tr>
-            <tr><td><code>@decodie-include:start/end</code></td><td>Block region</td></tr>
-            <tr><td><code>@decodie-ignore:file</code></td><td>Entire file</td></tr>
-            <tr><td><code>@decodie-ignore:class</code></td><td>Next class/interface/enum</td></tr>
-            <tr><td><code>@decodie-ignore:function</code></td><td>Next function/method</td></tr>
-            <tr><td><code>@decodie-ignore:start/end</code></td><td>Block region</td></tr>
-          </tbody>
-        </table>
-        <p style="font-size:0.8rem;color:var(--text-muted);">
-          <code>@decodie-ignore</code> always takes precedence over <code>@decodie-include</code> when scopes overlap. <code>@decodie-include</code> entries don't count against the 3&ndash;5 limit in selective mode.
-        </p>
-          <pre><code><span class="comment">// @decodie-ignore:class</span>
-<span style="color:var(--text-light)">class GeneratedHandler { ... }</span>
-
-<span class="comment"># @decodie-include:function</span>
-<span style="color:var(--text-light)">def calculate_risk_score(portfolio):</span>
-    <span style="color:var(--text-light)">...</span></code></pre>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+        <div>
+          <h4><code>/decodie:analyze</code></h4>
+          <p>Generate entries from existing code. Selective or exhaustive mode.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-lightbulb"></i></div>
+        <div>
+          <h4><code>/decodie:explain</code></h4>
+          <p>Get a detailed breakdown of any code &mdash; issues, improvements, key concepts.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-sitemap"></i></div>
+        <div>
+          <h4><code>/decodie:overview</code></h4>
+          <p>High-level summary of a file or project &mdash; purpose, structure, entry points.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-check-double"></i></div>
+        <div>
+          <h4><code>/decodie:verify</code></h4>
+          <p>Confirm entries still match the code. Stamps with current commit SHA.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><i class="fa-solid fa-flag"></i></div>
+        <div>
+          <h4><code>/decodie:flag-stale</code></h4>
+          <p>Fast CI check &mdash; flags entries whose source files have changed.</p>
         </div>
       </div>
     </div>
 
-    <div class="commands-grid" style="margin-top:2rem;">
-      <div class="commands-column">
-        <div class="cmd-card">
-          <h3><code>/decodie:verify</code></h3>
-          <p>Walk every entry's references, confirm the anchored code still resolves, and stamp confirmed entries with the current commit SHA. The deep check &mdash; reads each referenced file. Run it after large refactors or before publishing entries.</p>
-          <ul>
-            <li>Re-checks each <code>anchor_hash</code> against the current file contents</li>
-            <li>Backfills the <code>sources</code> field on older entries</li>
-            <li>Sets <code>verified_sha</code> to the current HEAD when all anchors resolve</li>
-            <li>Flips <code>stale: true</code> when an anchor is missing or a file has been removed</li>
-            <li>Optional path argument scopes the check to a subdirectory</li>
-          </ul>
-          <pre><code><span class="cmd">/decodie:verify</span>
-<span class="cmd">/decodie:verify src/auth/</span></code></pre>
-        </div>
-      </div>
-      <div class="commands-column">
-        <div class="cmd-card">
-          <h3><code>/decodie:flag-stale</code></h3>
-          <p>The cheap counterpart to <code>verify</code>, designed for CI on every PR. Diffs source files against each entry's <code>verified_sha</code> and flips <code>stale: true</code> on entries whose files have changed. No source files are read.</p>
-          <ul>
-            <li>Uses <code>git diff --name-only</code> &mdash; fast enough for every PR</li>
-            <li>Only sets the flag; clearing it requires <code>/decodie:verify</code></li>
-            <li>Skips entries that have never been verified (no baseline to diff against)</li>
-            <li>Output is machine-friendly so wrapping tools decide PR blocking policy</li>
-            <li>Used under the hood by the GitHub Action</li>
-          </ul>
-          <pre><code><span class="cmd">/decodie:flag-stale</span></code></pre>
-        </div>
-      </div>
-    </div>
-
-    <div class="commands-grid" style="margin-top:2rem; grid-template-columns: 1fr;">
-      <div class="commands-column">
-        <div class="cmd-card">
-          <h3><code>/decodie:overview</code></h3>
-          <p>Generate a high-level overview of a file, directory, or project &mdash; purpose, structure, entry points, and dependencies. The onboarding command: run this first when opening unfamiliar code, before drilling in with <code>analyze</code> or <code>explain</code>.</p>
-          <ul>
-            <li>Target a single file, a directory, or the whole project</li>
-            <li><strong>Persists by default</strong> &mdash; overviews are saved as entries so they can be browsed and shared</li>
-            <li>Re-running on the same target overwrites the existing overview in place &mdash; no superseded chains</li>
-            <li>Overview sessions are prefixed <code>overview-</code> for easy identification</li>
-            <li>Captures <code>purpose</code>, <code>structure</code>, optional <code>entry_points</code>, and optional <code>dependencies</code></li>
-          </ul>
-          <pre><code><span class="cmd">/decodie:overview src/auth/</span>
-<span class="cmd">/decodie:overview src/utils/helpers.ts</span>
-<span class="cmd">/decodie:overview</span>  <span class="comment"># whole project</span></code></pre>
-        </div>
-      </div>
+    <div class="section-cta centered">
+      <a href="/docs/guides/commands" class="btn btn-outline">Full command reference &rarr;</a>
     </div>
   </div>
 </section>
@@ -802,77 +717,15 @@
 
 <!-- ── GitHub Action ── -->
 <section class="section" id="github-action">
-  <div class="container">
+  <div class="container centered">
     <span class="section-label">GitHub Action</span>
     <h2>Automatic analysis on every pull request</h2>
-    <p class="section-intro">Add one workflow file and every PR gets analyzed automatically. Uses the same Decodie skill as Claude Code &mdash; same prompts, same schema, same quality.</p>
+    <p class="section-intro">Add one workflow file and every PR gets analyzed automatically. Posts a summary comment and commits entries to the branch.</p>
 
-    <div class="feature-grid">
-      <div class="feature-item">
-        <div class="fi-icon"><i class="fa-solid fa-robot"></i></div>
-        <div>
-          <h4>Zero manual effort</h4>
-          <p>Runs automatically when a PR is opened or updated. No need to remember to analyze &mdash; it just happens.</p>
-        </div>
-      </div>
-      <div class="feature-item">
-        <div class="fi-icon"><i class="fa-solid fa-comment"></i></div>
-        <div>
-          <h4>PR comment summary</h4>
-          <p>Posts a formatted comment with entries grouped by file. Collapsible sections keep it clean. Can be disabled with <code>comment: false</code>.</p>
-        </div>
-      </div>
-      <div class="feature-item">
-        <div class="fi-icon"><i class="fa-solid fa-code-commit"></i></div>
-        <div>
-          <h4>Commits to .decodie/</h4>
-          <p>Entries are committed to the PR branch, ready for the VSCode extension and web UI. Can be disabled with <code>commit: false</code>.</p>
-        </div>
-      </div>
-      <div class="feature-item">
-        <div class="fi-icon"><i class="fa-solid fa-sliders"></i></div>
-        <div>
-          <h4>Fully configurable</h4>
-          <p>Control max files, include/exclude patterns, selective vs exhaustive mode, model selection, and toggle comments and commits independently.</p>
-        </div>
-      </div>
-      <div class="feature-item">
-        <div class="fi-icon"><i class="fa-solid fa-key"></i></div>
-        <div>
-          <h4>Flexible auth</h4>
-          <p>Supports both Anthropic API keys (pay-per-token) and Claude Code OAuth tokens (Pro/Max subscription).</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="cmd-card" style="margin-top:2rem;">
-      <h3>Workflow setup</h3>
-      <p>Add this file to your repo at <code>.github/workflows/decodie.yml</code>:</p>
-      <pre><code><span class="cmd">name: Decodie</span>
-<span class="cmd">on:</span>
-  <span class="cmd">pull_request:</span>
-    <span class="cmd">types: [opened, synchronize]</span>
-
-<span class="cmd">jobs:</span>
-  <span class="cmd">analyze:</span>
-    <span class="cmd">runs-on: ubuntu-latest</span>
-    <span class="cmd">permissions:</span>
-      <span class="cmd">contents: write</span>
-      <span class="cmd">pull-requests: write</span>
-    <span class="cmd">steps:</span>
-      <span class="comment">- uses: actions/checkout@v4</span>
-        <span class="cmd">with:</span>
-          <span class="cmd">ref: ${{ github.head_ref }}</span>
-      <span class="comment">- uses: owenbush/decodie-github-action@v1</span>
-        <span class="cmd">with:</span>
-          <span class="comment"># Use one of:</span>
-          <span class="cmd">anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}</span>
-          <span class="comment"># claude-code-oauth-token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}</span></code></pre>
-    </div>
-
-    <div class="section-cta centered" style="margin-top:1.5rem;">
+    <div class="section-cta">
+      <a href="/docs/guides/github-action" class="btn btn-outline">Setup guide &rarr;</a>
       <a href="https://github.com/marketplace/actions/decodie-analyze" class="btn btn-primary">
-        <i class="fa-brands fa-github" style="margin-right:0.4rem;"></i> View on GitHub Marketplace
+        <i class="fa-brands fa-github" style="margin-right:0.4rem;"></i> GitHub Marketplace
       </a>
     </div>
   </div>
@@ -880,70 +733,13 @@
 
 <!-- ── GitHub Bot ── -->
 <section class="section section-alt" id="github-bot">
-  <div class="container">
+  <div class="container centered">
     <span class="section-label">GitHub Bot</span>
-    <h2>On-demand analysis and explanations in PR comments</h2>
-    <p class="section-intro">Mention <code>@decodie-bot</code> in any pull request comment. Highlight code in a review for an instant explanation, or ask it to analyze files from a top-level comment.</p>
+    <h2>On-demand analysis in PR comments</h2>
+    <p class="section-intro">Mention <code>@decodie-bot</code> in any PR comment for inline explanations or full analysis on demand.</p>
 
-    <div class="feature-grid">
-      <div class="feature-item">
-        <div class="fi-icon"><i class="fa-solid fa-code"></i></div>
-        <div>
-          <h4>Inline code explanations</h4>
-          <p>Highlight lines in a PR review and mention <code>@decodie-bot</code>. Get a detailed breakdown with summary, issues, improvements, and key concepts &mdash; posted as a reply.</p>
-        </div>
-      </div>
-      <div class="feature-item">
-        <div class="fi-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
-        <div>
-          <h4>On-demand analysis</h4>
-          <p>Ask <code>@decodie-bot analyze this PR</code> from a top-level comment. Generates structured learning entries for the changed files, just like the GitHub Action.</p>
-        </div>
-      </div>
-      <div class="feature-item">
-        <div class="fi-icon"><i class="fa-solid fa-eye"></i></div>
-        <div>
-          <h4>Instant feedback</h4>
-          <p>The bot reacts to your comment immediately and posts a status update with a link to the running workflow, so you always know it&rsquo;s working.</p>
-        </div>
-      </div>
-      <div class="feature-item">
-        <div class="fi-icon"><i class="fa-solid fa-people-arrows"></i></div>
-        <div>
-          <h4>Complements the Action</h4>
-          <p>The Action documents every PR automatically. The Bot answers specific questions during review. Use both together for full coverage.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="cmd-card" style="margin-top:2rem;">
-      <h3>Workflow setup</h3>
-      <p>Add this file to your repo at <code>.github/workflows/decodie-bot.yml</code>:</p>
-      <pre><code><span class="cmd">name: Decodie Bot</span>
-<span class="cmd">on:</span>
-  <span class="cmd">issue_comment:</span>
-    <span class="cmd">types: [created]</span>
-  <span class="cmd">pull_request_review_comment:</span>
-    <span class="cmd">types: [created]</span>
-
-<span class="cmd">jobs:</span>
-  <span class="cmd">bot:</span>
-    <span class="cmd">if: contains(github.event.comment.body, '@decodie-bot')</span>
-    <span class="cmd">runs-on: ubuntu-latest</span>
-    <span class="cmd">permissions:</span>
-      <span class="cmd">contents: read</span>
-      <span class="cmd">pull-requests: write</span>
-      <span class="cmd">issues: write</span>
-    <span class="cmd">steps:</span>
-      <span class="comment">- uses: actions/checkout@v4</span>
-      <span class="comment">- uses: owenbush/decodie-github-bot@main</span>
-        <span class="cmd">with:</span>
-          <span class="comment"># Use one of:</span>
-          <span class="cmd">anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}</span>
-          <span class="comment"># claude-code-oauth-token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}</span></code></pre>
-    </div>
-
-    <div class="section-cta centered" style="margin-top:1.5rem;">
+    <div class="section-cta">
+      <a href="/docs/guides/github-bot" class="btn btn-outline">Setup guide &rarr;</a>
       <a href="https://github.com/owenbush/decodie-github-bot" class="btn btn-primary">
         <i class="fa-brands fa-github" style="margin-right:0.4rem;"></i> View on GitHub
       </a>
@@ -955,122 +751,25 @@
 <section class="section" id="start">
   <div class="container centered">
     <span class="section-label">Getting Started</span>
-    <h2>Choose your path</h2>
-    <p class="section-intro">Pick the setup that matches your workflow.</p>
-  </div>
-  <div class="container">
-    <div class="start-grid">
-      <div class="start-card">
-        <span class="start-badge badge-blue">Claude Code</span>
-        <h3>CLI + Web UI</h3>
-        <p>Install the skill, document as you code, then browse entries in the web UI.</p>
-        <pre><code><span class="comment"># Install commands</span>
-<span class="cmd">npx @owenbush/decodie-ui install-skill</span>
+    <h2>Up and running in minutes</h2>
+    <p class="section-intro">Pick your path &mdash; the docs walk you through setup for each tool.</p>
 
-<span class="comment"># Start documenting</span>
-<span class="cmd">/decodie:observe</span>
-
-<span class="comment"># Or analyze existing code</span>
-<span class="cmd">/decodie:analyze src/</span>
-
-<span class="comment"># Browse entries</span>
-<span class="cmd">npx @owenbush/decodie-ui serve</span></code></pre>
-      </div>
-      <div class="start-card">
-        <span class="start-badge badge-purple">VSCode</span>
-        <h3>Extension</h3>
-        <p>Install the extension, add API credentials, then right-click to analyze any file.</p>
-        <pre><code><span class="comment"># Install from Marketplace</span>
-<span class="comment"># Search "Decodie" in Extensions</span>
-
-<span class="comment"># Add credentials</span>
-<span class="comment"># Create .decodie/.env:</span>
-<span class="cmd">CLAUDE_API_KEY=sk-ant-...</span>
-
-<span class="comment"># Right-click any file</span>
-<span class="comment"># → Decodie: Analyze File</span></code></pre>
-      </div>
-      <div class="start-card">
-        <span class="start-badge badge-green">DDEV</span>
-        <h3>One command</h3>
-        <p>If you use DDEV, install everything &mdash; the skill, the UI, and HTTPS routing &mdash; in one step.</p>
-        <pre><code><span class="comment"># Install the add-on</span>
-<span class="cmd">ddev add-on get owenbush/decodie-ddev</span>
-<span class="cmd">ddev restart</span>
-
-<span class="comment"># Open the UI</span>
-<span class="cmd">ddev decodie</span>
-
-<span class="comment"># Start documenting</span>
-<span class="cmd">/decodie:observe</span></code></pre>
-      </div>
-      <div class="start-card">
-        <span class="start-badge" style="background:rgba(251,191,36,0.15);color:var(--amber);">GitHub Action</span>
-        <h3>Automatic on every PR</h3>
-        <p>Add a workflow file and entries are generated automatically on every pull request.</p>
-        <pre><code><span class="comment"># .github/workflows/decodie.yml</span>
-<span class="cmd">- uses: owenbush/decodie-github-action@v1</span>
-  <span class="cmd">with:</span>
-    <span class="cmd">anthropic-api-key:</span>
-      <span class="cmd">${{ secrets.ANTHROPIC_API_KEY }}</span></code></pre>
-      </div>
-      <div class="start-card">
-        <span class="start-badge" style="background:rgba(251,191,36,0.15);color:var(--amber);">GitHub Bot</span>
-        <h3>On-demand in PR comments</h3>
-        <p>Mention <code>@decodie-bot</code> in any PR comment for explanations or analysis on demand.</p>
-        <pre><code><span class="comment"># .github/workflows/decodie-bot.yml</span>
-<span class="cmd">- uses: owenbush/decodie-github-bot@main</span>
-  <span class="cmd">with:</span>
-    <span class="cmd">anthropic-api-key:</span>
-      <span class="cmd">${{ secrets.ANTHROPIC_API_KEY }}</span></code></pre>
-      </div>
+    <div class="section-cta">
+      <a href="/docs/installation" class="btn btn-primary">Installation guide &rarr;</a>
+      <a href="/docs/provider-setup" class="btn btn-outline">Provider setup &rarr;</a>
     </div>
   </div>
 </section>
 
 <!-- ── Technical ── -->
 <section class="section section-alt" id="technical">
-  <div class="container">
+  <div class="container centered">
     <span class="section-label">How it works</span>
-    <h2>Under the hood</h2>
-    <p class="section-intro">Decodie stores everything in a self-contained <code>.decodie/</code> directory as plain JSON. The data format is tool-agnostic &mdash; any application that reads JSON can consume it.</p>
+    <h2>Plain JSON, fully portable</h2>
+    <p class="section-intro">Everything lives in a <code>.decodie/</code> directory as plain JSON. Content-based anchoring means entries survive refactoring and formatting changes. Commit it to share with your team, or <code>.gitignore</code> it to keep it personal.</p>
 
-    <div class="tech-grid">
-      <div class="tech-block">
-        <h3>Directory structure</h3>
-        <p>All data lives in <code>.decodie/</code> at the project root. Commit it to share with your team, or <code>.gitignore</code> it to keep it personal.</p>
-        <pre><code>.decodie/
-├── index.json          <span class="comment"># Entry metadata</span>
-├── config.json         <span class="comment"># User preferences</span>
-├── .env                <span class="comment"># API credentials</span>
-├── sessions/
-│   ├── 2026-04-01-001.json
-│   └── analyze-2026-04-01-001.json
-├── conversations/      <span class="comment"># Q&A history</span>
-├── lessons.json        <span class="comment"># Custom lessons</span>
-└── progress.json       <span class="comment"># Learning progress</span></code></pre>
-      </div>
-      <div class="tech-block">
-        <h3>Content-based anchoring</h3>
-        <p>References use function signatures and class declarations as anchors &mdash; not line numbers. This means entries survive refactoring, code moves, and formatting changes.</p>
-        <ul>
-          <li>Exact match, fuzzy match (whitespace differences), and drifted match (file moved)</li>
-          <li>SHA-256 hash of anchor text for quick verification</li>
-          <li>Confidence scoring for each resolution</li>
-        </ul>
-
-        <h3 style="margin-top:1.5rem;">Entry structure</h3>
-        <p>Each entry captures what a developer needs to understand the code:</p>
-        <ul>
-          <li><strong>Title</strong> &mdash; concise description of the pattern or decision</li>
-          <li><strong>Code snippet</strong> &mdash; the relevant excerpt</li>
-          <li><strong>Explanation</strong> &mdash; why this approach, not just what it does</li>
-          <li><strong>Alternatives</strong> &mdash; what else was considered and trade-offs</li>
-          <li><strong>Key concepts</strong> &mdash; core takeaways</li>
-          <li><strong>Experience level</strong> &mdash; foundational, intermediate, advanced, or ecosystem</li>
-          <li><strong>Topics</strong> &mdash; kebab-case tags for filtering</li>
-        </ul>
-      </div>
+    <div class="section-cta">
+      <a href="/docs/reference/configuration" class="btn btn-outline">Configuration reference &rarr;</a>
     </div>
   </div>
 </section>

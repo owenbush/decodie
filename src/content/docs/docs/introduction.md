@@ -18,11 +18,10 @@ These entries are stored in a `.decodie/` directory alongside your code in a str
 
 ## Products
 
-Decodie is available in three forms:
-
 - **[VS Code Extension](/docs/guides/vscode)** — analyse and explain code selections, ask follow-up questions, all within your editor
 - **[Local UI](/docs/guides/local-ui)** — a web dashboard that reads your `.decodie/` directory and presents entries with filtering, lessons, and Q&A
-- **[Decodie Cloud](/docs/guides/cloud)** — a hosted platform with GitHub integration, team workspaces, and automated analysis of pull requests
+- **[GitHub Action](/docs/guides/github-action)** — automatic analysis on every pull request
+- **[GitHub Bot](/docs/guides/github-bot)** — on-demand analysis via `@decodie-bot` in PR comments
 
 ## Multi-provider LLM support
 

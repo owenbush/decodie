@@ -111,15 +111,6 @@ Replace `ANTHROPIC_API_KEY` with the variable for your provider:
 Add `.decodie/.env` to your `.gitignore` to avoid committing your API key.
 :::
 
-### Decodie Cloud
-
-In Decodie Cloud, credentials are stored per-workspace:
-
-1. Go to **Settings > Credentials**
-2. Select your provider from the dropdown
-3. Paste your API key
-4. Click **Save**
-
 ## Override the default model
 
 Each provider has a sensible default model. To use a different model, set the `LLM_MODEL` variable:

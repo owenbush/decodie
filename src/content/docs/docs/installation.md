@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: How to install Decodie for VS Code, the local UI, or Decodie Cloud.
+description: How to install Decodie for VS Code or the local UI.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -41,15 +41,5 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
     This opens a web dashboard at `http://localhost:3000` showing your learning entries.
 
     Next: [Configure a provider](/docs/provider-setup) to enable Q&A, then see the [Local UI guide](/docs/guides/local-ui).
-  </TabItem>
-
-  <TabItem label="Decodie Cloud">
-    Decodie Cloud is a hosted platform — no local installation required.
-
-    1. Sign up at [app.decodie.dev](https://app.decodie.dev)
-    2. Connect your GitHub repositories
-    3. Add an API key in **Settings > Credentials**
-
-    See the [Cloud guide](/docs/guides/cloud) for full setup instructions.
   </TabItem>
 </Tabs>
