@@ -7,6 +7,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Decodie',
+      favicon: '/favicon.png',
       logo: {
         src: './public/assets/decodie-icon.png',
       },
