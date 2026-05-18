@@ -32,6 +32,7 @@ export default defineConfig({
             { label: 'Local UI', slug: 'docs/guides/local-ui' },
             { label: 'GitHub Action', slug: 'docs/guides/github-action' },
             { label: 'GitHub Bot', slug: 'docs/guides/github-bot' },
+            { label: 'DDEV Add-on', slug: 'docs/guides/ddev' },
           ],
         },
         {
