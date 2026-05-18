@@ -9,7 +9,6 @@ Decodie stores its configuration in `.decodie/config.json` in your project root.
 
 ```json
 {
-  "user_experience_level": "intermediate",
   "preferred_topics": [],
   "excluded_topics": [],
   "archival_threshold_days": 90,
@@ -24,7 +23,6 @@ Decodie stores its configuration in `.decodie/config.json` in your project root.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `user_experience_level` | string | `"intermediate"` | Your experience level: `foundational`, `intermediate`, `advanced`, or `ecosystem`. Entries are tagged with levels to help you focus on what's relevant. |
 | `preferred_topics` | string[] | `[]` | Topics to prioritise in the UI. |
 | `excluded_topics` | string[] | `[]` | Topics to hide from the UI. |
 | `archival_threshold_days` | number | `90` | Number of days after which entries are suggested for archival. |
