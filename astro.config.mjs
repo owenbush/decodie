@@ -27,7 +27,7 @@ export default defineConfig({
         {
           label: 'Guides',
           items: [
-            { label: 'Claude Code Commands', slug: 'docs/guides/commands' },
+            { label: 'Skills', slug: 'docs/guides/commands' },
             { label: 'VS Code Extension', slug: 'docs/guides/vscode' },
             { label: 'Local UI', slug: 'docs/guides/local-ui' },
             { label: 'GitHub Action', slug: 'docs/guides/github-action' },
