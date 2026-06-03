@@ -57,6 +57,15 @@ Get an immediate, detailed explanation of a specific piece of code — what it d
 - **Ephemeral by default** — nothing is saved unless you explicitly ask
 - Saved explanations use the `explain-` session prefix
 
+## decodie-ask
+
+Ask questions about existing learning entries and get deeper explanations using the entry content and live source code as context.
+
+- Resolves the target entry by ID, keyword match, or most recent in session
+- Loads the full entry content and reads current source files for context
+- Goes beyond the entry — explains underlying concepts, provides examples, clarifies trade-offs
+- Read-only — does not create or modify entries
+
 ## decodie-overview
 
 Generate a high-level overview of a file, directory, or project — purpose, structure, entry points, and dependencies. The onboarding skill: run this first when opening unfamiliar code.
