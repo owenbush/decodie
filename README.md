@@ -8,7 +8,7 @@ Your AI learning companion. This repo hosts the [Decodie website](https://decodi
 
 | Repo | Description |
 |------|-------------|
-| [decodie-skill](https://github.com/owenbush/decodie-skill) | Claude Code skill that generates learning entries |
+| [decodie-skill](https://github.com/owenbush/decodie-skill) | Agent skills for generating learning entries (70+ agents) |
 | [decodie-ui](https://github.com/owenbush/decodie-ui) | Presentation layer (Node.js web app) |
 | [decodie-ddev](https://github.com/owenbush/decodie-ddev) | DDEV add-on |
 | [decodie-vscode](https://github.com/owenbush/decodie-vscode) | VSCode extension ([Marketplace](https://marketplace.visualstudio.com/items?itemName=owenbush.decodie-vscode)) |
