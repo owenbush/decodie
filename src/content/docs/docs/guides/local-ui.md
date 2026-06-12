@@ -7,7 +7,7 @@ The Decodie local UI is a web dashboard that reads your `.decodie/` directory an
 
 ## Prerequisites
 
-- [Install the CLI](/docs/installation)
+- [Install the CLI](/docs/installation#local-ui)
 - A project with a `.decodie/` directory containing learning entries
 - [An API key](/docs/provider-setup) (required for Q&A only)
 
