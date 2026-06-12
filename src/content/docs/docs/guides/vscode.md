@@ -7,7 +7,7 @@ The Decodie VS Code extension lets you analyse code selections, get explanations
 
 ## Prerequisites
 
-- [Install the extension](/docs/installation)
+- [Install the extension](/docs/installation#vs-code-extension)
 - [Configure an API key](/docs/provider-setup)
 
 ## Features
