@@ -40,10 +40,10 @@ The add-on provides a `ddev decodie` host command:
 
 | Command | Description |
 |---------|-------------|
-| `ddev decodie` | Open the UI in your browser |
+| `ddev decodie` | Open Decodie in your browser |
 | `ddev decodie status` | Show entry statistics |
-| `ddev decodie cleanup` | Open the archival review page |
-| `ddev decodie settings` | Open the settings page |
+| `ddev decodie settings` | Open settings page |
+| `ddev decodie lessons` | Open lessons page |
 | `ddev decodie help` | Show usage information |
 
 ## How it works
